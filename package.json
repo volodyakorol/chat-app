@@ -24,7 +24,7 @@
     "lint:strict": "eslint --max-warnings=0 src",
     "test:watch": "jest --watch",
     "test": "jest",
-    "format": "prettier -w .",
+    "format": "prettier -w ."
   },
   "dependencies": {
     "next": "^12.3.0",
