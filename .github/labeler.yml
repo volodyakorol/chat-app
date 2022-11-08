@@ -1,6 +1,5 @@
 new lib:
 - package.json
 changelog unchanged:
-- color: "#d73a4a"
 - all: ["!CHANGELOG.md"]
 
