@@ -1,0 +1,94 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "plugins": ["@typescript-eslint", "simple-import-sort", "unused-imports"],
+  "extends": [
+    "eslint:recommended",
+    "next",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "rules": {
+    "no-shadow": "off",
+    "no-console": "warn",
+    "no-redeclare": "off",
+    "arrow-parens": "error",
+    "no-unused-vars": "off",
+    "init-declarations": "off",
+    "no-multi-spaces": "error",
+    "quotes": ["warn", "single"],
+    "lines-around-comment": "off",
+    "no-trailing-spaces": "error",
+    "eol-last": ["error", "always"],
+    "no-shadow-restricted-names": "error",
+
+    //^ react
+    "react/prop-types": "off",
+    "react/display-name": "off",
+    "react/jsx-tag-spacing": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-curly-brace-presence": ["warn", { "props": "never", "children": "never" }],
+
+    //^ typescript
+    "@typescript-eslint/semi": "error",
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/no-redeclare": "error",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+
+    //^ Unused Import
+    "unused-imports/no-unused-imports": "warn",
+    "unused-imports/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "varsIgnorePattern": "^_",
+        "args": "after-used",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+
+    //^ Import Sort
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": [
+      "warn",
+      {
+        "groups": [
+          //  side effect imports
+          ["^\\u0000"],
+          // ext library
+          ["react", "^@?\\w"],
+          // internal imports
+          ["^@/*"],
+          // relative paths up until 3 level
+          [
+            "^\\./?$",
+            "^\\.(?!/?$)",
+            "^\\.\\./?$",
+            "^\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\.(?!/?$)",
+            "^\\.\\./\\.\\./\\.\\./?$",
+            "^\\.\\./\\.\\./\\.\\.(?!/?$)"
+          ],
+          // css, scss files
+          [".*.module.s?css$", "^.+\\.s?css$"],
+          // other
+          ["^"]
+        ]
+      }
+    ]
+  },
+  "globals": {
+    "React": true,
+    "JSX": true
+  }
+}

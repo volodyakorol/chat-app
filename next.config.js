@@ -1,4 +1,6 @@
-module.exports = {
+const { withSentryConfig } = require('@sentry/nextjs');
+
+const moduleExports = {
   eslint: {
     dirs: ['src'],
   },
@@ -21,4 +23,14 @@ module.exports = {
 
     return config;
   },
+
+  sentry: {
+    hideSourceMaps: true,
+  },
 };
+
+const sentryWebpackPluginOptions = {
+  silent: true,
+};
+
+module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);

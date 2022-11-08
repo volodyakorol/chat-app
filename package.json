@@ -14,7 +14,7 @@
     "**/*.{json,css,scss,md}": [
       "prettier -w"
     ]
-  },   
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -27,6 +27,7 @@
     "format": "prettier -w ."
   },
   "dependencies": {
+    "@sentry/nextjs": "^7.18.0",
     "next": "^12.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
