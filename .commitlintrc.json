@@ -1,0 +1,14 @@
+{
+  "extends": [
+    "@commitlint/config-conventional"
+  ],
+  "rules": {
+    "header-max-length": [
+      2,
+      "always",
+      255
+    ]
+  }
+}
+
+// types: 'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'
