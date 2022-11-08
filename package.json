@@ -14,7 +14,7 @@
     "**/*.{json,css,scss,md}": [
       "prettier -w"
     ]
-  },
+  },   
   "scripts": {
     "dev": "next dev",
     "build": "next build",

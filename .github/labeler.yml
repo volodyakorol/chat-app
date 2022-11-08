@@ -1,4 +1,4 @@
-lib:
+new lib:
 - package.json
-changelog_unchanged:
+changelog unchanged:
 - all: ["!CHANGELOG.md"]
