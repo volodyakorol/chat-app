@@ -1,0 +1,78 @@
+.sider {
+  padding: 15px 0;
+  width: 68px;
+  min-height: 100vh;
+  height: 100%;
+  position: fixed;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.327) 0px 5px 15px;
+  z-index: 1;
+}
+
+.content {
+  margin-left: 68px;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 5px;
+}
+
+.menu {
+  display: grid;
+  gap: 15px;
+}
+
+.menuItem {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & p {
+    color: #191548;
+    margin: 0;
+    margin-top: 6px;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 12px;
+  }
+}
+
+.menuIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #191548;
+  background-color: #e9f3fc;
+  transition: all .3s;
+
+  &:hover {
+    background-color: #d9e7f3;
+    color: #251e69;
+  }
+
+  & svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &.active {
+    background: linear-gradient(131.76deg, #153a88 -0.66%, #080054 100.66%);
+    color: #fff;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.824);
+    }
+  }
+}
