@@ -11,6 +11,7 @@ import 'antd/dist/antd.css';
 config.autoAddCss = false;
 
 function App({ Component, pageProps }: AppProps) {
+
   return (
     <WithProviders>
       <AppLayout>

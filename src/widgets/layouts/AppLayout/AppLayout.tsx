@@ -9,29 +9,29 @@ import s from './styles.module.scss';
 
 import ImageLogo from '~/logo.svg';
 
+const tabs = [
+  {
+    label: 'Chat',
+    path: '/chat',
+    icon: regularIcons.faComment,
+    activeIcon: solidIcons.faComment,
+  },
+  {
+    label: 'Friends',
+    path: '/friends',
+    icon: solidIcons.faUserGroup,
+    activeIcon: solidIcons.faUserGroup,
+  },
+  {
+    label: 'Profile',
+    path: '/profile',
+    icon: regularIcons.faUser,
+    activeIcon: solidIcons.faUser,
+  },
+];
+
 export const AppLayout = ({ children }: PropsWithChildren) => {
   const { pathname } = useRouter();
-
-  const paths = [
-    {
-      label: 'Chat',
-      path: '/chat',
-      icon: regularIcons.faComment,
-      activeIcon: solidIcons.faComment,
-    },
-    {
-      label: 'Friends',
-      path: '/friends',
-      icon: solidIcons.faUserGroup,
-      activeIcon: solidIcons.faUserGroup,
-    },
-    {
-      label: 'Profile',
-      path: '/profile',
-      icon: regularIcons.faUser,
-      activeIcon: solidIcons.faUser,
-    },
-  ];
 
   return (
     <div>
@@ -41,7 +41,7 @@ export const AppLayout = ({ children }: PropsWithChildren) => {
         </div>
 
         <div className={s.menu}>
-          {paths.map(({ label, icon, path, activeIcon }) => {
+          {tabs.map(({ label, icon, path, activeIcon }) => {
             const active = pathname.startsWith(path);
 
             return (
