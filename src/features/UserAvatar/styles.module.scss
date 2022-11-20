@@ -1,0 +1,13 @@
+.cropper {
+  height: 100%;
+  max-height: 500px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.avatar {
+  cursor: pointer;
+}

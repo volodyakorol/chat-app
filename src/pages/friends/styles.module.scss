@@ -1,0 +1,15 @@
+.screen {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  background-color: #fff;
+  width: 100%;
+  max-width: 550px;
+  box-shadow: rgb(0 0 0 / 20%) 2px 2px 10px;
+  padding: 20px;
+  border-radius: 10px;
+}

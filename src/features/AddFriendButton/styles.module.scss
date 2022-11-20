@@ -1,0 +1,16 @@
+.modalBody {
+  padding: 35px 0;
+}
+
+.selectedUsers {
+  margin-top: 10px;
+  height: 300px;
+  overflow: hidden auto;
+}
+
+.obg {
+
+  & svg {
+    fill: red
+  }
+}
