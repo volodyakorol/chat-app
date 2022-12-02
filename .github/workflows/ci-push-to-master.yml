@@ -1,8 +1,9 @@
 name: GitHub Actions
 
 env:
-  SENTRY_URL: https://selfhosted/
+  SENTRY_URL: https://sentry.io/
   SENTRY_ORG: org
+  SENTRY_PROJECT: chat
   SENTRY_AUTH_TOKEN: SECRET
   SENTRY_PROJECT: projectName
 
