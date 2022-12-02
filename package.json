@@ -44,7 +44,7 @@
     "sass": "^1.54.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
+    "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.1.0",
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",
