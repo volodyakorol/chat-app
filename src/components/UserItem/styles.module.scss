@@ -1,0 +1,29 @@
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.01em;
+}
+
+.messagePreview {
+  max-width: 200px;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.actions {
+  margin-left: auto;
+  margin-right: 0;
+}
