@@ -1,7 +1,10 @@
 name: GitHub Actions
 
 env:
-  SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+  SENTRY_URL: https://selfhosted/
+  SENTRY_ORG: org
+  SENTRY_AUTH_TOKEN: SECRET
+  SENTRY_PROJECT: projectName
 
 on:
   push:
