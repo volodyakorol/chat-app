@@ -1,3 +1,4 @@
+import { useCreateFriendRequest, useSearchUsers } from '@/shared/reactQueries';
 import React, { useState } from 'react';
 import { Button, List, Modal } from 'antd';
 
@@ -8,8 +9,9 @@ import s from './styles.module.scss';
 export const AddFriendButton = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
-  const [selectUsers, setSelectUsers] = useState<any>([]);
-  const propositionUser = [] as any;
+
+  const { requestFriend } = useCreateFriendRequest();
+  const { data = [], isLoading } = useSearchUsers({ query: value });
 
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -19,14 +21,15 @@ export const AddFriendButton = () => {
       <Button onClick={openModal}>Add friend</Button>
       <Modal data-testid='add-friend-modal' open={open} onCancel={closeModal}>
         <div className={s.modalBody}>
-          <Input value={value} onChange={(event) => setValue(event.target.value)} placeholder='Enter username' />
+          <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />
           <div className={s.selectedUsers}>
             <List
               itemLayout='horizontal'
-              dataSource={value ? propositionUser : selectUsers}
-              renderItem={() => (
-                <UserItem description='dfsd' title='fgd'>
-                  {!!value && <Button>Request</Button>}
+              loading={isLoading}
+              dataSource={data}
+              renderItem={({ firstName, lastName, email, profile }) => (
+                <UserItem avatar={profile?.avatar} description={email} title={`${firstName} ${lastName}`}>
+                  <Button onClick={() => requestFriend({ email: email })}>Request</Button>
                 </UserItem>
               )}
             />

@@ -6,7 +6,7 @@ export default function Home() {
       <Button type='primary'>
         Primary Button
       </Button>
-      <a href='http://localhost:3001/google'>Sign in nest</a>
+      <a href='http://localhost:3000/google'>Sign in nest</a>
     </div>
   );
 }

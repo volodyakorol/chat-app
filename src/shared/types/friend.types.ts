@@ -1,4 +1,4 @@
-import { User } from "@/shared/api/users";
+import { User } from '@/shared/types';
 
 export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
 export type HandleFriendRequestAction = 'accept' | 'reject' | 'cancel';

@@ -1,5 +1,4 @@
-import { User } from '@/shared/api';
-import { MessageType } from '@/shared/api/groups';
+import { MessageType, User } from '@/shared/types';
 
 export type Conversation = {
   id: number;
@@ -10,7 +9,7 @@ export type Conversation = {
 };
 
 export type CreateConversationParams = {
-  username: string;
+  email: string;
   message: string;
 };
 
@@ -25,7 +24,7 @@ export type ConversationTypeData = {
   type: ConversationType;
   label: string;
 };
-export type FetchMessagePayload = {
+export type GetMessagesResponse = {
   id: number;
   messages: MessageType[];
 };

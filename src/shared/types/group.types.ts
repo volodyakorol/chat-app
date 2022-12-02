@@ -1,4 +1,4 @@
-import { Conversation, User } from '@/shared/api';
+import { Conversation, User } from '@/shared/types';
 
 export type MessageType = {
   id: number;
@@ -67,7 +67,7 @@ export type CreateGroupParams = {
 
 export type AddGroupRecipientParams = {
   id: number;
-  username: string;
+  email: string;
 };
 
 export type RemoveGroupRecipientParams = {

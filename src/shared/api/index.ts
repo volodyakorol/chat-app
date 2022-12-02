@@ -1,14 +1,12 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = 'http://localhost:3000/api';
 
-const api = axios.create({ baseURL: 'http://localhost:3001/api', withCredentials: true });
+const api = axios.create({ baseURL: API_URL, withCredentials: true });
 
-api.interceptors.response.use((response) => response.data);
-
-export { api, API_URL };
 export * from './auth';
-export * from './conversations';
-export * from './friends';
-export * from './groups';
-export * from './users';
+export * from './conversation';
+export * from './friend';
+export * from './group';
+export * from './user';
+export { api, API_URL };

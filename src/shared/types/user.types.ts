@@ -17,7 +17,6 @@ export type UserPeer = {
 
 export type User = {
   id: number;
-  username: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -28,4 +27,8 @@ export type User = {
 
 export type StatusMessage = {
   statusMessage: string;
+};
+
+export type TSearchUserRequest = {
+  query: string;
 };
