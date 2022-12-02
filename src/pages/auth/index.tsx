@@ -1,10 +1,10 @@
+import { useLogin, useRegister } from '@/shared/reactQueries';
 import { useState } from 'react';
 import { Button, Form, Input, notification } from 'antd';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import { GoogleAuthButton } from '@/features';
-import { useLogin, useRegister } from '@/shared/api';
 
 import s from './styles.module.scss';
 

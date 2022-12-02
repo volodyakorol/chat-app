@@ -1,5 +1,5 @@
 import { api } from '@/shared/api';
-import { EditMessagePayload, MessageType } from '@/shared/api';
+import { EditMessagePayload, MessageType } from '@/shared/types';
 
 import { CreateConversationParams, DeleteMessageParams, DeleteMessageResponse } from '../types/conversation.types';
 
