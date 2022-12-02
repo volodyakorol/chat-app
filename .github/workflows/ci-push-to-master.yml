@@ -1,15 +1,19 @@
 name: GitHub Actions
+
+env:
+  NEXT_PUBLIC_SENTRY_DSN: ${{ secrets.NEXT_PUBLIC_SENTRY_DSN }}
+
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master,dev ]
+    branches: [master, dev]
 jobs:
   init:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-varsion: [ 16.x ]
+        node-varsion: [16.x]
     steps:
       - uses: actions/checkout@v3
       - name: Staring Node.js ${{ matrix.node-version }}
