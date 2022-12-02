@@ -1,20 +1,19 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 
 import { AddFriendButton } from '@/features/AddFriendButton/AddFriendButton';
+import { renderWithClient } from '@/shared/lib/testing';
 
 describe('add friend button', () => {
-  it('render a button', () => {
-    render(<AddFriendButton />);
+  it('render a button', async () => {
+    renderWithClient(<AddFriendButton />);
 
-    const button = screen.getByText(/Add friend/i);
-
-    expect(button).toBeInTheDocument();
+    expect(screen.getByText(/add friend/i)).toBeInTheDocument();
   });
 
   it('should render a modal', async () => {
-    const { getByText } = render(<AddFriendButton />);
+    renderWithClient(<AddFriendButton />);
 
-    fireEvent.click(getByText('Add friend'));
+    fireEvent.click(screen.getByText('Add friend'));
 
     await waitFor(() => expect(screen.queryByTestId('add-friend-modal')).toBeInTheDocument());
   });
