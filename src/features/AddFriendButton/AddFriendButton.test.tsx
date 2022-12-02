@@ -4,7 +4,7 @@ import { AddFriendButton } from '@/features/AddFriendButton/AddFriendButton';
 import { renderWithClient } from '@/shared/lib/testing';
 
 describe('add friend button', () => {
-  it('render a button', async () => {
+  it('render a button', () => {
     renderWithClient(<AddFriendButton />);
 
     expect(screen.getByText(/add friend/i)).toBeInTheDocument();
