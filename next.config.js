@@ -5,6 +5,8 @@ const moduleExports = {
     dirs: ['src'],
   },
 
+  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
+
   //^ SVGR
   webpack(config) {
     config.module.rules.push({

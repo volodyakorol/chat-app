@@ -1,0 +1,44 @@
+.cropper_wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.cropper {
+  background-color: white !important;
+  max-height: 500px !important;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  left: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.action {
+  border-radius: 5px !important;
+}
+
+.upload {
+  align-items: center;
+  color: var(--color-gray-8);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: 64px;
+  height: 100%;
+  justify-content: center;
+  min-height: 250px;
+
+  p {
+    font-size: 32px;
+    font-weight: 600;
+  }
+}
+
+.fileInput {
+  display: none;
+}

@@ -1,5 +1,6 @@
 import s from './styles.module.scss';
 
+
 export default function NotFoundPage() {
   return (
     <div className={s.main}>

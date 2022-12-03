@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+
+  &.me {
+    flex-direction: row-reverse;
+  }
+}
+
+.message {
+  max-width: 70%;
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+
+  &.me {
+    align-items: flex-end;
+  }
+}
+
+.text {
+  padding: 15px 20px;
+  border-radius: 20px;
+  border-top-left-radius: 0px;
+  background-color: rgb(15, 85, 62);
+  color: white;
+  font-size: 14px;
+  line-height: 14px;
+
+  &.me {
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+  }
+}
+
+.time {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
