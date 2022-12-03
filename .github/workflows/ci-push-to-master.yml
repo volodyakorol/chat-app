@@ -13,33 +13,55 @@ on:
   pull_request:
     branches: [master, dev]
 
+permissions:
+  contents: read
+
 jobs:
   install:
-    name: Install packages
+    name: Install dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Staring Node.js ${{ env.NODE_VERSION }}.x
-        uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup node
+      - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}.x
-      - name: Install modules
-        run: npm install
+          cache: 'npm'
+
+      - name: Cache NPM dependencies # (2)
+        uses: actions/cache@v3
+        id: cache-primes
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies # (3)
+        if: steps.cache-primes.outputs.cache-hit != 'true'
+        run: npm ci
+
   test:
     name: Test
     needs: install
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Lint code
         run: npm run lint
+
       - name: Test code
         run: npm run test
+
   build:
     name: Build
     needs: test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Build project
         run: npm run build
