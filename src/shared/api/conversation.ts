@@ -19,7 +19,7 @@ export const conversationsApi = {
   //     })
   //     .then((res) => res.data),
 
-  postNewConversation: (data: CreateConversationParams) => api.post('/conversations', data).then((res) => res.data),
+  createNewConversation: (data: CreateConversationParams) => api.post('/conversations', data).then((res) => res.data),
 
   editMessage: ({ content, id, messageId }: EditMessagePayload) =>
     api.patch<MessageType>(`/conversations/${id}/messages/${messageId}`, { content }).then((res) => res.data),
