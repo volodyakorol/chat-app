@@ -4,7 +4,6 @@ env:
   NODE_VERSION: 16
   SENTRY_URL: https://sentry.io/
   SENTRY_ORG: org
-  SENTRY_PROJECT: chat
   SENTRY_AUTH_TOKEN: SECRET
   SENTRY_PROJECT: projectName
 
