@@ -1,6 +1,7 @@
 name: GitHub Actions
 
 env:
+  NODE_VERSION: 16
   SENTRY_URL: https://sentry.io/
   SENTRY_ORG: org
   SENTRY_PROJECT: chat
@@ -12,23 +13,34 @@ on:
     branches: [master]
   pull_request:
     branches: [master, dev]
+
 jobs:
-  init:
+  install:
+    name: Install packages
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-varsion: [16.x]
     steps:
       - uses: actions/checkout@v3
-      - name: Staring Node.js ${{ matrix.node-version }}
+      - name: Staring Node.js ${{ env.NODE_VERSION }}.x
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
+          node-version: ${{ env.NODE_VERSION }}.x
+      - name: Install modules
         run: npm install
-      - name: lint code
+  test:
+    name: Test
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint code
         run: npm run lint
-      - name: test code
+      - name: Test code
         run: npm run test
-      - name: build project
+  build:
+    name: Build
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build project
         run: npm run build
