@@ -7,16 +7,22 @@ import s from './styles.module.scss';
 
 type TUserItemProps = {
   avatar?: string;
+  online?: boolean;
   title: string;
   description: string;
 };
 
-export const UserItem = ({ avatar, title, description, children }: PropsWithChildren<TUserItemProps>) => {
+export const UserItem = ({ avatar, title, online, description, children }: PropsWithChildren<TUserItemProps>) => {
+  const UserAvatar = <Avatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />;
   return (
     <div className={s.container}>
-      <Badge dot offset={[-5, 5]} size='default'>
-        <Avatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />
-      </Badge>
+      {online ? (
+        <Badge dot offset={[-5, 5]} size='default'>
+          {UserAvatar}
+        </Badge>
+      ) : (
+        UserAvatar
+      )}
 
       <div>
         <p className={s.title}>{title}</p>

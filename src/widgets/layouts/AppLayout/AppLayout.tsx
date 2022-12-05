@@ -1,4 +1,4 @@
-import { useAuthUser } from '@/shared/reactQueries';
+import { useGetUserMe } from '@/shared/reactQueries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropsWithChildren } from 'react';
 import { dehydrate, QueryClient } from 'react-query';
@@ -48,22 +48,22 @@ export const getServerSideProps = async () => {
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter();
-  const { isLoading, isSuccess } = useAuthUser();
+  const { isLoading, isSuccess } = useGetUserMe();
   const isAuthPage = ['/auth'].includes(router.pathname);
 
-  if (isLoading) {
-    return <h1>LOADING ...</h1>;
-  }
+  // if (isLoading) {
+  //   return <h1>LOADING ...</h1>;
+  // }
 
-  if (!isSuccess && !isAuthPage) {
-    router.push('/auth');
-  }
+  // if (!isSuccess && !isAuthPage) {
+  //   router.push('/auth');
+  // }
 
-  if (isSuccess && isAuthPage) {
-    router.push('/chat');
-  }
+  // if (isSuccess && isAuthPage) {
+  //   router.push('/chat');
+  // }
 
-  if (isAuthPage) return <>{children}</>;
+  // if (isAuthPage) return <>{children}</>;
 
   return (
     <div>

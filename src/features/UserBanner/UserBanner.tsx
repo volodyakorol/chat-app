@@ -13,7 +13,7 @@ type PropsT = {
   onAvatarChange?: (image: File) => void;
 };
 
-export const UserAvatar = ({ canEdit, src, onAvatarChange }: PropsT) => {
+export const UserBanner = ({ canEdit, src, onAvatarChange }: PropsT) => {
   const cropperRef = useRef<FixedCropperRef>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -36,7 +36,7 @@ export const UserAvatar = ({ canEdit, src, onAvatarChange }: PropsT) => {
 
   return (
     <>
-      <div onClick={showModal}>
+      <div onClick={showModal} >
         <Avatar src={src} size={90} shape='circle' className={clsx({ [s.avatar]: canEdit })} />
       </div>
 

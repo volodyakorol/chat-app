@@ -1,0 +1,16 @@
+.asideHeader {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+  & h3 {
+    color: #fff;
+  }
+}
+
+.block {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

@@ -11,14 +11,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'antd/dist/antd.css';
 import 'react-advanced-cropper/dist/style.css';
 import '@/shared/styles/index.scss';
-import 'antd/dist/antd.css';
-
-config.autoAddCss = false;
 
 config.autoAddCss = false;
 
 function App({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
-  const [api] = notification.useNotification();
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -32,7 +28,7 @@ function App({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
           mutations: {
             onError(error) {
               const mutationError = error as { message?: string };
-              api.error({
+              notification.error({
                 message: 'Error',
                 description: mutationError?.message ?? 'Something went wrong',
                 placement: 'topRight',
@@ -45,11 +41,11 @@ function App({ Component, pageProps }: AppProps<{ dehydratedState: unknown }>) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps?.dehydratedState}>
+      {/* <Hydrate state={pageProps?.dehydratedState}> */}
         <AppLayout>
           <Component {...pageProps} />
         </AppLayout>
-      </Hydrate>
+      {/* </Hydrate> */}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
