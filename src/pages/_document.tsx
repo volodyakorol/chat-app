@@ -1,4 +1,6 @@
-import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import Document, { DocumentContext, Html, Main, NextScript } from 'next/document';
+
+import PageHead from '@/components/PageHead';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -9,8 +11,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html lang='en'>
-        <Head>
-        </Head>
+        <PageHead />
         <body>
           <Main />
           <NextScript />
