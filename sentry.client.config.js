@@ -8,9 +8,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 
   beforeSend(event) {
-    if (event.exception && isProd) {
-      Sentry.showReportDialog({ eventId: event.event_id });
-    }
+    // if (event.exception && isProd) {
+    //   Sentry.showReportDialog({ eventId: event.event_id });
+    // }
 
     return event;
   },
