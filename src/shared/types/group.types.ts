@@ -9,6 +9,15 @@ export type MessageType = {
   attachments?: MessageAttachment[];
 };
 
+export type GroupMessageType = {
+  id: number;
+  content?: string;
+  createdAt: string;
+  author: User;
+  group: Group;
+  attachments?: MessageAttachment[];
+};
+
 export type Group = {
   id: number;
   title?: string;
@@ -18,7 +27,7 @@ export type Group = {
   messages: GroupMessageType[];
   createdAt: number;
   lastMessageSent: MessageType;
-  lastMessageSentAt: Date;
+  lastMessageSentAt: string;
   avatar?: string;
 };
 
@@ -51,14 +60,7 @@ export type MessageAttachment = {
   key: string;
 };
 
-export type GroupMessageType = {
-  id: number;
-  content?: string;
-  createdAt: string;
-  author: User;
-  group: Group;
-  attachments?: MessageAttachment[];
-};
+
 
 export type CreateGroupParams = {
   users: string[];

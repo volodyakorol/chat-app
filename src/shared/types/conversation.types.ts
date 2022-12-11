@@ -5,6 +5,7 @@ export type Conversation = {
   creator: User;
   recipient: User;
   createdAt: string;
+  lastMessageSentAt: string;
   lastMessageSent: MessageType;
 };
 

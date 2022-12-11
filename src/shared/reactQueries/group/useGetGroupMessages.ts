@@ -2,7 +2,9 @@ import { useQuery, UseQueryOptions } from 'react-query';
 import { AxiosError } from 'axios';
 
 import { groupApi } from '@/shared/api';
-import { Group } from '@/shared/types';
+import { FetchGroupMessagePayload, TIdRequest } from '@/shared/types';
 
-export const useGetGroupMessages = <T = Group[]>(options?: UseQueryOptions<Group[], AxiosError, T>) =>
-  useQuery<Group[], AxiosError, T>(['get-groups'], groupApi.getGroups, options);
+export const useGetGroupMessages = <T = FetchGroupMessagePayload>(
+  data: TIdRequest,
+  options?: UseQueryOptions<TIdRequest, AxiosError, T>,
+) => useQuery<TIdRequest, AxiosError, T>(['get-group-messages'], () => groupApi.getGroupMessages(data), options);

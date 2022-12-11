@@ -4,7 +4,7 @@ import { userApi } from '@/shared/api';
 import { StatusMessage } from '@/shared/types';
 
 export const useUpdateUserStatus = () => {
-  const { mutate, ...rest } = useMutation(['update-status-message'], (data: StatusMessage) =>
+  const { mutate, ...rest } = useMutation(['update-user-status-message'], (data: StatusMessage) =>
     userApi.updateStatusMessage(data),
   );
 

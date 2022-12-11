@@ -1,18 +1,18 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-	font-size: 16px;
-	width: 100%;
-	min-height: 100vh;
+  font-size: 16px;
+  width: 100%;
+  min-height: 100vh;
 
-	@media (max-width: 700px) {
-		font-size: 15px;
-	}
+  @media (max-width: 700px) {
+    font-size: 15px;
+  }
 }
 
 h1,
@@ -21,33 +21,34 @@ h3,
 h4,
 h5,
 h6 {
-	font-weight: 600;
+  color: inherit;
+  font-weight: 600;
 }
 
 h1 {
-	font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 h2 {
-	font-size: 1.75rem;
+  font-size: 1.75rem;
 }
 
 h3 {
-	font-size: 1.375rem;
+  font-size: 1.375rem;
 }
 
 h4 {
-	font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 h5 {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 p {
-	margin: 0;
+  margin: 0;
 }

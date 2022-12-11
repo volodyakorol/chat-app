@@ -13,3 +13,35 @@
   padding: 20px;
   border-radius: 10px;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.headerTabs {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 20px;
+
+  & div {
+    cursor: pointer;
+  }
+
+  & div.active {
+    border-bottom: 1px solid rgb(152, 152, 152);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.list {
+  max-height: 400px;
+  overflow: auto;
+}

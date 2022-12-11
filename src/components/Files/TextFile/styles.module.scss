@@ -1,0 +1,27 @@
+.files {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.file {
+  width: 100%;
+  min-height: 40px;
+  border-bottom: 1px solid var(--color-tertiary);
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.icon {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.name {
+  font-size: 14px;
+  color: var(--color-gray-9);
+  margin-bottom: 0;
+  width: 200px;
+}

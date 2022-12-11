@@ -8,14 +8,14 @@ import { ImageCropper } from '@/shared/lib';
 import s from './styles.module.scss';
 
 type PropsT = {
-  src: string;
+  src?: string;
   canEdit?: boolean;
+  onAvatarChange?: (image: File) => void;
 };
 
-export const UserAvatar = ({ canEdit, src }: PropsT) => {
+export const UserAvatar = ({ canEdit, src, onAvatarChange }: PropsT) => {
   const cropperRef = useRef<FixedCropperRef>(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [avatar, setAvatar] = useState(src);
 
   const showModal = () => canEdit && setIsModalVisible(true);
 
@@ -26,11 +26,10 @@ export const UserAvatar = ({ canEdit, src }: PropsT) => {
     if (canvas) {
       canvas.toBlob((blob) => {
         if (!blob) return null;
-        // const image = new File([blob], '.jpg');
-
+        const image = new File([blob], '.jpg');
+        onAvatarChange && onAvatarChange(image);
         // console.log('send this', image);
         // console.log('send this', canvas.toDataURL());
-        setAvatar(canvas.toDataURL());
       }, 'image/jpeg');
     }
   };
@@ -38,16 +37,10 @@ export const UserAvatar = ({ canEdit, src }: PropsT) => {
   return (
     <>
       <div onClick={showModal}>
-        <Avatar src={avatar} size={90} shape='circle' className={clsx({ [s.avatar]: canEdit })} />
+        <Avatar src={src} size={90} shape='circle' className={clsx({ [s.avatar]: canEdit })} />
       </div>
 
-      <Modal
-        title='Profile photo'
-        visible={isModalVisible}
-        bodyStyle={{ padding: 0 }}
-        onCancel={onClose}
-        onOk={onSave}
-      >
+      <Modal title='Profile photo' visible={isModalVisible} bodyStyle={{ padding: 0 }} onCancel={onClose} onOk={onSave}>
         <div className={s.cropper}>
           <ImageCropper src={src} ref={cropperRef} />
         </div>
