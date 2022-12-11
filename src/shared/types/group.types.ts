@@ -27,7 +27,7 @@ export type Group = {
   messages: GroupMessageType[];
   createdAt: number;
   lastMessageSent: MessageType;
-  lastMessageSentAt: Date;
+  lastMessageSentAt: string;
   avatar?: string;
 };
 

@@ -1,6 +1,7 @@
 import { useGetGroup } from '@/shared/reactQueries';
 import { faHourglassStart, faMessage, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Avatar } from 'antd';
+import dayjs from 'dayjs';
 
 import { InfoItem, UserItem } from '@/components';
 
@@ -15,13 +16,22 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
   const { createdAt, owner, users, avatar, title, messages } = data ?? {};
 
   return (
-    <div>
+    <div className={s.groupAside}>
       <div className={s.asideHeader}>
         <Avatar size={140} src={avatar} />
         <h3>{title}</h3>
       </div>
       <div className={s.block}>
-        <InfoItem icon={faHourglassStart} label='CreatedAt:' info={createdAt} />
+        <InfoItem
+          icon={faHourglassStart}
+          label='CreatedAt:'
+          info={
+            <>
+              <br />
+              {dayjs(createdAt).format('DD MMM YYYY')}
+            </>
+          }
+        />
         <InfoItem icon={faUsers} label='Users:' info={users?.length} />
         <InfoItem icon={faMessage} label='Messages:' info={messages?.length} />
       </div>

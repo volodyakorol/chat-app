@@ -7,4 +7,4 @@ import { FetchGroupMessagePayload, TIdRequest } from '@/shared/types';
 export const useGetGroupMessages = <T = FetchGroupMessagePayload>(
   data: TIdRequest,
   options?: UseQueryOptions<TIdRequest, AxiosError, T>,
-) => useQuery<TIdRequest, AxiosError, T>(['get-groups'], () => groupApi.getGroupMessages(data), options);
+) => useQuery<TIdRequest, AxiosError, T>(['get-group-messages'], () => groupApi.getGroupMessages(data), options);

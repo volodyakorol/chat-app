@@ -3,19 +3,28 @@ import { PropsWithChildren } from 'react';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { Avatar, Badge } from 'antd';
 
+import { TDiv } from '@/shared/types';
+
 import s from './styles.module.scss';
 
-type TUserItemProps = {
+type TUserItemProps = TDiv & {
   avatar?: string;
   online?: boolean;
   title: string;
   description: string;
 };
 
-export const UserItem = ({ avatar, title, online, description, children }: PropsWithChildren<TUserItemProps>) => {
+export const UserItem = ({
+  avatar,
+  title,
+  online,
+  description,
+  children,
+  ...props
+}: PropsWithChildren<TUserItemProps>) => {
   const UserAvatar = <Avatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />;
   return (
-    <div className={s.container}>
+    <div className={s.container} {...props}>
       {online ? (
         <Badge dot offset={[-5, 5]} size='default'>
           {UserAvatar}

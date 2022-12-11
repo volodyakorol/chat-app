@@ -10,66 +10,9 @@ import { Button, List, Tabs } from 'antd';
 
 import { UserItem } from '@/components';
 import { AddFriendButton } from '@/features';
-import { Friend, User } from '@/shared/types';
+import { User } from '@/shared/types';
 
 import s from './styles.module.scss';
-
-const user = {
-  firstName: 'dsf',
-  email: 'volodyakorol@gmail.com',
-  lastName: 'lastName',
-  id: 0,
-  peer: { id: 'dsf' },
-  profile: {
-    id: 0,
-    avatar: 'sdf',
-  },
-};
-
-const data: Friend[] = [
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-  {
-    createdAt: 23243243234,
-    id: 0,
-    receiver: user,
-    sender: user,
-  },
-];
 
 type TTab = 'friends' | 'request';
 
@@ -103,7 +46,7 @@ export default function Home() {
               className={s.list}
               itemLayout='horizontal'
               loading={isLoading}
-              dataSource={data}
+              dataSource={friends}
               renderItem={({ id, receiver, sender }) => {
                 const { firstName, lastName, email, profile } = resolveFriend(sender, receiver);
 
@@ -126,14 +69,16 @@ export default function Home() {
 
                 return (
                   <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
-                    <div className={s.actions}>
-                      <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>
-                        accept
-                      </Button>
-                      <Button size='small' onClick={() => rejectRequest({ id })}>
-                        reject
-                      </Button>
-                    </div>
+                    {receiver.id === userMe?.id && (
+                      <div className={s.actions}>
+                        <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>
+                          accept
+                        </Button>
+                        <Button size='small' onClick={() => rejectRequest({ id })}>
+                          reject
+                        </Button>
+                      </div>
+                    )}
                   </UserItem>
                 );
               }}

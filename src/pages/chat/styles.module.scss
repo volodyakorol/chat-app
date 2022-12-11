@@ -115,3 +115,15 @@
 .inputContainer {
   margin-top: 20px;
 }
+
+.notChat {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & h1 {
+    font-size: 72px;
+    color: rgb(215, 215, 215)
+  }
+}

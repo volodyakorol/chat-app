@@ -1,0 +1,16 @@
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+
+  & img {
+    height: 100%;
+  }
+}
+
+.image_wrapper {
+  min-height: 60px;
+  max-height: 200px;
+  display: flex;
+  align-items: center;
+}

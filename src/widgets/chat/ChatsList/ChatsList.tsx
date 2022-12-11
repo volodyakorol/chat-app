@@ -1,12 +1,11 @@
-import { useGetConversations, useGetGroups } from '@/shared/reactQueries';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useGetConversations, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
 import { Radio, RadioChangeEvent } from 'antd';
+import dayjs from 'dayjs';
 
-import { Conversation, Input } from '@/components';
+import { Conversation } from '@/components';
+import { CreateChatButton } from '@/features';
 
 import s from './styles.module.scss';
-import dayjs from 'dayjs';
 
 type TChatsListProps = {
   selectedGroup?: number;
@@ -25,6 +24,8 @@ export const ChatsList = ({
   isGroup,
   setIsGroup,
 }: TChatsListProps) => {
+
+  const { data } = useGetUserMe();
   const { data: chats = [] } = useGetConversations({ enabled: !isGroup });
   const { data: groups = [] } = useGetGroups({ enabled: isGroup });
 
@@ -35,11 +36,7 @@ export const ChatsList = ({
   return (
     <div className={s.chats}>
       <div className={s.search}>
-        <Input
-          size='large'
-          placeholder='Search messages'
-          prefix={<FontAwesomeIcon color='#C5C7D2' icon={faSearch} />}
-        />
+        <CreateChatButton />
       </div>
       <Radio.Group className={s.chatTypes} onChange={handleModeChange} value={isGroup ? 'groups' : 'chats'}>
         <Radio.Button value='chats'>Chats</Radio.Button>
@@ -47,41 +44,44 @@ export const ChatsList = ({
       </Radio.Group>
       <div>
         {!isGroup &&
-          chats.map(({ id, lastMessageSent, recipient }) => {
-            const { content, createdAt } = lastMessageSent;
-            const { firstName, lastName, profile } = recipient;
+          chats.map(({ id, lastMessageSent, lastMessageSentAt, recipient, creator }) => {
+            const { firstName, lastName, profile } = data?.id === recipient.id ? creator : recipient;
 
             return (
               <Conversation
                 key={id}
-                time={dayjs(createdAt).format('h:mm a')}
+                time={dayjs(lastMessageSentAt).format('h:mm a')}
                 title={`${firstName} ${lastName}`}
                 isActive={selectedChat === id}
-                description={content}
+                description={lastMessageSent?.content}
                 avatar={profile?.avatar}
-                onChange={() => onSelectChat(id)}
+                onClick={() => onSelectChat(id)}
               />
             );
           })}
 
         {isGroup &&
-          groups.map(({ id, lastMessageSent, avatar, title }) => {
-            const { content, author, createdAt } = lastMessageSent;
+          groups.map(({ id, lastMessageSent, lastMessageSentAt, avatar, title }) => {
+            const { content, author } = lastMessageSent ?? {};
 
             return (
               <Conversation
                 key={id}
-                time={dayjs(createdAt).format('h:mm a')}
+                time={dayjs(lastMessageSentAt).format('h:mm a')}
                 title={title}
                 isActive={selectedGroup === id}
                 avatar={avatar}
                 description={
-                  <>
-                    <b>{author.firstName}</b>
-                    {content}
-                  </>
+                  lastMessageSent ? (
+                    <>
+                      <b>{author.firstName}</b>
+                      {content}
+                    </>
+                  ) : (
+                    'you wsa invited to this group'
+                  )
                 }
-                onChange={() => onSelectGroup(id)}
+                onClick={() => onSelectGroup(id)}
               />
             );
           })}

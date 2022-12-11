@@ -16,7 +16,9 @@ export const InfoItem = ({ icon, info, label }: TInfoItemProps) => {
   return (
     <div className={s.infoItem}>
       <FontAwesomeIcon className={s.socialIcon} icon={icon} />
-      {label} {info}
+      <p className={s.content}>
+        {label} {info}
+      </p>
     </div>
   );
 };

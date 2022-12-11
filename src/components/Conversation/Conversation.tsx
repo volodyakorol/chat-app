@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactNode } from 'react';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import { Avatar, Badge } from 'antd';
+import { Avatar } from 'antd';
 import clsx from 'clsx';
 
 import { TDiv } from '@/shared/types';
@@ -19,9 +19,7 @@ type TUserItemProps = TDiv & {
 export const Conversation = ({ avatar, title, time, description, isActive, ...props }: TUserItemProps) => {
   return (
     <div className={clsx(s.container, { [s.active]: isActive })} {...props}>
-      <Badge dot offset={[-10, 10]} size='default'>
-        <Avatar src={avatar} size={44} icon={<FontAwesomeIcon icon={faUserAlt} />} />
-      </Badge>
+      <Avatar src={avatar} size={44} icon={<FontAwesomeIcon icon={faUserAlt} />} />
 
       <div className={s.item}>
         <div className={s.itemHeader}>

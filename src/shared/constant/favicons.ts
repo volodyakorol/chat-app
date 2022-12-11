@@ -48,11 +48,12 @@ export const favicons: TFavIcon[] = [
     sizes: '180x180',
     href: '/favicon/apple-icon-180x180.png',
   },
+
   {
     rel: 'icon',
     type: 'image/png',
-    sizes: '192x192',
-    href: '/favicon/android-icon-192x192.png',
+    sizes: '16x16',
+    href: '/favicon/favicon-16x16.png',
   },
   {
     rel: 'icon',
@@ -69,9 +70,10 @@ export const favicons: TFavIcon[] = [
   {
     rel: 'icon',
     type: 'image/png',
-    sizes: '16x16',
-    href: '/favicon/favicon-16x16.png',
+    sizes: '192x192',
+    href: '/favicon/favicon-192x192.png',
   },
+
   {
     rel: 'manifest',
     href: '/favicon/manifest.json',

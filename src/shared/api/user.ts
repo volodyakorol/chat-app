@@ -17,7 +17,7 @@ export const userApi = {
     about && formData.append('about', about);
 
     return api
-      .patch<User>('/users/profiles', formData, {
+      .patch<User>('/users', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => res.data);
