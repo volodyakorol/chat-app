@@ -1,9 +1,9 @@
 import { useGetGroup } from '@/shared/reactQueries';
 import { faHourglassStart, faMessage, faUsers } from '@fortawesome/free-solid-svg-icons';
-import { Avatar } from 'antd';
 import dayjs from 'dayjs';
 
 import { InfoItem, UserItem } from '@/components';
+import { UserAvatar } from '@/features';
 
 import s from './styles.module.scss';
 
@@ -15,10 +15,13 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
   const { data } = useGetGroup({ id: selectedGroup });
   const { createdAt, owner, users, avatar, title, messages } = data ?? {};
 
+  const ownerUser = users?.find(({ id }) => id === owner?.id);
+  const members = users?.filter(({ id }) => id !== owner?.id);
+
   return (
     <div className={s.groupAside}>
       <div className={s.asideHeader}>
-        <Avatar size={140} src={avatar} />
+        <UserAvatar size={140} src={avatar} />
         <h3>{title}</h3>
       </div>
       <div className={s.block}>
@@ -38,15 +41,15 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
       <div className='divider' />
       <div className={s.block}>
         <h4>Owner</h4>
-        {!!owner && (
+        {!!ownerUser && (
           <UserItem
-            description={owner.email}
-            title={`${owner.firstName} ${owner.lastName}`}
-            avatar={owner.profile?.avatar}
+            description={ownerUser.email}
+            title={`${ownerUser.firstName} ${ownerUser.lastName}`}
+            avatar={ownerUser.profile?.avatar}
           />
         )}
         <h4>Users</h4>
-        {users?.map(({ id, email, firstName, lastName, profile }) => (
+        {members?.map(({ id, email, firstName, lastName, profile }) => (
           <UserItem key={id} description={email} title={`${firstName} ${lastName}`} avatar={profile?.avatar} />
         ))}
       </div>

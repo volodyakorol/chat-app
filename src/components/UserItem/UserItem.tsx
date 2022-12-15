@@ -1,8 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropsWithChildren } from 'react';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
-import { Avatar, Badge } from 'antd';
+import { Badge } from 'antd';
 
+import { UserAvatar } from '@/features';
 import { TDiv } from '@/shared/types';
 
 import s from './styles.module.scss';
@@ -22,15 +23,16 @@ export const UserItem = ({
   children,
   ...props
 }: PropsWithChildren<TUserItemProps>) => {
-  const UserAvatar = <Avatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />;
+  const Avatar = <UserAvatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />;
+
   return (
     <div className={s.container} {...props}>
       {online ? (
         <Badge dot offset={[-5, 5]} size='default'>
-          {UserAvatar}
+          {Avatar}
         </Badge>
       ) : (
-        UserAvatar
+        Avatar
       )}
 
       <div>

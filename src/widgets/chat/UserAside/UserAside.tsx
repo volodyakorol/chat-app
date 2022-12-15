@@ -1,10 +1,10 @@
 import { useGetConversationById } from '@/shared/reactQueries';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faHourglassStart, faMailForward } from '@fortawesome/free-solid-svg-icons';
-import { Avatar } from 'antd';
 import dayjs from 'dayjs';
 
 import { InfoItem } from '@/components';
+import { UserAvatar } from '@/features';
 
 import s from './styles.module.scss';
 
@@ -20,7 +20,7 @@ export const UserAside = ({ selectedChat }: TUserAsideProps) => {
   return (
     <div>
       <div className={s.asideHeader}>
-        <Avatar size={140} src={profile?.avatar} />
+        <UserAvatar size={140} src={profile?.avatar} />
         <h3>{`${firstName} ${lastName}`}</h3>
       </div>
       <div className={s.userAbout}>

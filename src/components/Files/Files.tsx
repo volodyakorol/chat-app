@@ -1,12 +1,26 @@
-import React from 'react';
-
-import { TFileType } from '@/shared/types/file.types';
+import { AudioFile, ImageFile, TextFile, VideoFile } from '@/components/';
 
 type PropsT = {
-  types: TFileType[];
+  files: File[];
 };
 
-export const Files = ({ types }: PropsT) => {
+export const Files = ({ files }: PropsT) => {
+  return (
+    <>
+      {/* {files.map((file) => {
+        const generalType = file.type.split('/')[0];
 
-  return <></>;
+        switch (generalType) {
+          case 'video':
+            return <VideoFile files={[file]} />;
+          case 'audio':
+            return <AudioFile files={[file]} />;
+          case 'image':
+            return <ImageFile files={[file]} />;
+          default:
+            return <TextFile files={[file]} />;
+        }
+      })} */}
+    </>
+  );
 };
