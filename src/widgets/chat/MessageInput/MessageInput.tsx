@@ -4,13 +4,19 @@ import { faFloppyDisk, faPaperclip } from '@fortawesome/free-solid-svg-icons';
 import { notification } from 'antd';
 
 import { Input } from '@/components';
+import { Files } from '@/components/Files';
 
 import s from './styles.module.scss';
 
 const MAX_FILES = 3;
 
-export const MessageInput = () => {
+type TMessageInputProps = {
+  onSend: (content: string, attachments: File[]) => void;
+};
+
+export const MessageInput = ({ onSend }: TMessageInputProps) => {
   const [attachments, setAttachments] = useState<File[]>([]);
+  const [content, setContent] = useState('');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const onAttachmentClick = () => fileInputRef.current?.click();
@@ -22,17 +28,26 @@ export const MessageInput = () => {
     setAttachments(files);
   };
 
-  const onSentClick = () => {};
+  const onSentClick = () => {
+    onSend(content, attachments);
+    setContent('');
+  };
 
   return (
     <>
+      <div className={s.attachments}>
+        {/* {attachments.map(({ type }) => (
+          <Files type={type} />
+        ))} */}
+      </div>
       <Input
         size='large'
         placeholder='Type something'
+        onPressEnter={onSentClick}
+        value={content}
+        onChange={(event) => setContent(event.target.value)}
         prefix={<FontAwesomeIcon className='pointer' onClick={onAttachmentClick} color='#C5C7D2' icon={faPaperclip} />}
-        addonAfter={
-          <FontAwesomeIcon className='pointer' onClick={onSentClick} color='#C5C7D2' icon={faFloppyDisk} />
-        }
+        addonAfter={<FontAwesomeIcon className='pointer' onClick={onSentClick} color='#C5C7D2' icon={faFloppyDisk} />}
       />
       <input
         ref={fileInputRef}

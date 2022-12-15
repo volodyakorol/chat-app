@@ -1,5 +1,14 @@
 import { MessageType, User } from '@/shared/types';
 
+export type Attachment = {
+  id: number;
+  file: File;
+};
+
+export type ConversationId = {
+  conversationId: string | number;
+};
+
 export type Conversation = {
   id: number;
   creator: User;
@@ -43,4 +52,10 @@ export type DeleteMessageParams = {
 export type MessageEventPayload = {
   message: MessageType;
   conversation: Conversation;
+};
+
+export type TCreateMessage = {
+  attachments?: File[];
+  conversationId: number;
+  content: string;
 };

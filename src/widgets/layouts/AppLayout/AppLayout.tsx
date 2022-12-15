@@ -1,3 +1,4 @@
+import { useGetUserMe } from '@/shared/reactQueries';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PropsWithChildren } from 'react';
 import * as regularIcons from '@fortawesome/free-regular-svg-icons';
@@ -11,10 +12,16 @@ import ImageLogo from '~/logo.svg';
 
 const tabs = [
   {
-    label: 'Chat',
-    path: '/chat',
+    label: 'Chats',
+    path: '/chats',
     icon: regularIcons.faComment,
     activeIcon: solidIcons.faComment,
+  },
+  {
+    label: 'Groups',
+    path: '/groups',
+    icon: regularIcons.faObjectGroup,
+    activeIcon: solidIcons.faObjectGroup,
   },
   {
     label: 'Friends',
@@ -32,18 +39,23 @@ const tabs = [
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
   const router = useRouter();
-  // const isAuth = 'sdf';
-  // const isAuthPage = ['/auth'].includes(router.pathname);
+  const isAuthPage = ['/auth'].includes(router.pathname);
 
-  // if (isAuth && isAuthPage) {
-  //   router.push('/chat');
-  // }
+  const { data, isLoading } = useGetUserMe();
 
-  // if (!isAuth && !isAuthPage) {
-  //   router.push('/auth');
-  // }
+  if (isLoading) return <h1>Loading</h1>;
 
-  // if (isAuthPage) return <>{children}</>;
+  if (data && isAuthPage) {
+    router.push('/chats');
+    return null;
+  }
+
+  if (!data && !isAuthPage) {
+    router.push('/auth');
+    return null;
+  }
+
+  if (!data) return <>{children}</>;
 
   return (
     <div>

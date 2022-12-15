@@ -1,4 +1,8 @@
-import { Conversation, User } from '@/shared/types';
+import { Attachment, Conversation, User } from '@/shared/types';
+
+export type TGroupId = {
+  groupId: number | string;
+};
 
 export type MessageType = {
   id: number;
@@ -60,8 +64,6 @@ export type MessageAttachment = {
   key: string;
 };
 
-
-
 export type CreateGroupParams = {
   users: string[];
   title: string;
@@ -108,4 +110,10 @@ export type UpdateGroupPayload = {
 export type GroupParticipantLeftPayload = {
   group: Group;
   userId: number;
+};
+
+export type TCreateGroupMessage = {
+  attachments?: Attachment[];
+  groupId: number;
+  content: string;
 };
