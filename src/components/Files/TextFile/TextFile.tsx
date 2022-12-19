@@ -9,7 +9,7 @@ import {
 
 import { TFileProps } from '@/shared/types/file.types';
 
-import stylesheet from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export const TextFile = ({ files }: { files: (TFileProps & { filetype?: string })[] }) => {
   const icon = (fileExtension: string) => {
@@ -23,11 +23,11 @@ export const TextFile = ({ files }: { files: (TFileProps & { filetype?: string }
   };
 
   return (
-    <div className={stylesheet.files}>
-      {files.map(({ filename, src, filetype }, index) => (
-        <div key={index} className={stylesheet.file}>
-          <a className={stylesheet.name} onClick={() => console.log(src)}>
-            <span className={stylesheet.icon}>{icon(filetype ?? '')}</span>
+    <div className={styles.files}>
+      {files.map(({ filename, src, filetype }) => (
+        <div key={src} className={styles.file}>
+          <a className={styles.name} href={src}>
+            <span className={styles.icon}>{icon(filetype ?? '')}</span>
             {filename}
           </a>
         </div>

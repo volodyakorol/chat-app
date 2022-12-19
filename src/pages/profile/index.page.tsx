@@ -1,11 +1,11 @@
-import { useGetUserMe, useUpdateUserProfile } from '@/shared/reactQueries';
 import { useEffect, useState } from 'react';
 import { Button } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 
 import { UserAvatar } from '@/features';
+import { useGetUserMe, useUpdateUserProfile } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export default function Profile() {
   const [about, setAbout] = useState('');
@@ -18,10 +18,10 @@ export default function Profile() {
   }, [data?.profile?.about]);
 
   return (
-    <div className={s.screen}>
-      <div className={s.content}>
+    <div className={styles.screen}>
+      <div className={styles.content}>
         <UserAvatar canEdit={true} src={data?.profile?.avatar} onAvatarChange={(avatar) => updateProfile({ avatar })} />
-        <div className={s.textareaWrapper}>
+        <div className={styles.textareaWrapper}>
           <TextArea
             value={about}
             rows={4}

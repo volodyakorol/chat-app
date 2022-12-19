@@ -24,7 +24,7 @@
     "lint:strict": "eslint --max-warnings=0 src",
     "test:watch": "jest --watch",
     "test": "jest",
-    "format": "prettier -w ."
+    "format": "prettier -w ./src"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.2.0",

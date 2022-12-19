@@ -5,8 +5,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { notification } from 'antd';
 import type { AppProps } from 'next/app';
 
-import useSocket from '@/shared/hook/useSocket';
-import { GetMessagesResponse } from '@/shared/types';
 import { AppLayout } from '@/widgets/layouts';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -39,17 +37,6 @@ export default function App({ Component, pageProps }: AppProps<{ dehydratedState
         },
       }),
   );
-
-  useSocket('onMessage', async ({ conversation, message }) => {
-    await queryClient.cancelQueries(['get-conversation-messages', conversation.id]);
-
-    queryClient.setQueryData<GetMessagesResponse | undefined>(
-      ['get-conversation-messages', conversation.id],
-      (data) => {
-        return data && { ...data, messages: [ ...data.messages, message] };
-      },
-    );
-  });
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -3,24 +3,24 @@ import clsx from 'clsx';
 import { Files } from '@/components/Files';
 import { UserAvatar } from '@/features';
 import { SDN_URL } from '@/shared/constant';
-import { MessageAttachment } from '@/shared/types';
+import { TMessageAttachment } from '@/shared/types';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type TUserMessageProps = {
   avatar?: string;
   isMyMessage?: boolean;
   time: string;
   message: string;
-  attachments?: MessageAttachment[];
+  attachments?: TMessageAttachment[];
 };
 
 export const UserMessage = ({ avatar, time, message, isMyMessage, attachments }: TUserMessageProps) => {
   return (
-    <div className={clsx(s.container, { [s.me]: isMyMessage })}>
+    <div className={clsx(styles.container, { [styles.me]: isMyMessage })}>
       <UserAvatar size={35} src={avatar} />
-      <div className={clsx(s.messageContainer, { [s.me]: isMyMessage })}>
-        <div className={clsx(s.message, { [s.me]: isMyMessage })}>
+      <div className={clsx(styles.messageContainer, { [styles.me]: isMyMessage })}>
+        <div className={clsx(styles.message, { [styles.me]: isMyMessage })}>
           <p>{message}</p>
           {attachments && (
             <Files
@@ -32,7 +32,7 @@ export const UserMessage = ({ avatar, time, message, isMyMessage, attachments }:
             />
           )}
         </div>
-        <p className={s.time}>{time}</p>
+        <p className={styles.time}>{time}</p>
       </div>
     </div>
   );

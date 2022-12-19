@@ -1,27 +1,27 @@
-import { User } from '@/shared/types';
+import { TUser } from '@/shared/types';
 
-export type FriendRequestStatus = 'accepted' | 'pending' | 'rejected';
-export type HandleFriendRequestAction = 'accept' | 'reject' | 'cancel';
+export type TFriendRequestStatus = 'accepted' | 'pending' | 'rejected';
+export type THandleFriendRequestAction = 'accept' | 'reject' | 'cancel';
 
-export type Friend = {
+export type TFriend = {
   id: number;
-  friend: User;
+  friend: TUser;
   createdAt: string;
 };
 
-export type FriendRequest = {
+export type TFriendRequest = {
   id: number;
-  sender: User;
-  receiver: User;
+  sender: TUser;
+  receiver: TUser;
   createdAt: number;
-  status: FriendRequestStatus;
+  status: TFriendRequestStatus;
 };
 
-export type CancelFriendRequestResponse = {
+export type TCancelFriendRequestResponse = {
   id: number;
 };
 
 export type AcceptFriendRequestResponse = {
-  friend: Friend;
-  friendRequest: FriendRequest;
+  friend: TFriend;
+  friendRequest: TFriendRequest;
 };

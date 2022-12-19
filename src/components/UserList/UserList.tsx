@@ -1,15 +1,14 @@
-import { useGetUserMe } from '@/shared/reactQueries';
-import React from 'react';
 import { List } from 'antd';
 
 import { UserItem } from '@/components/UserItem/UserItem';
-import { User } from '@/shared/types';
+import { useGetUserMe } from '@/shared/reactQueries';
+import { TUser } from '@/shared/types';
 
 type TUserListProps = {
   isLoading?: boolean;
-  users?: User[];
+  users?: TUser[];
   withMe?: boolean;
-  onSelectUser?: (user: User) => void;
+  onSelectUser?: (user: TUser) => void;
 };
 
 export const UserList = ({ isLoading, users, onSelectUser, withMe = false }: TUserListProps) => {

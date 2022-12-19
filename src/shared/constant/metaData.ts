@@ -4,6 +4,7 @@ export const metaData = {
   siteName: 'chat app',
   description: 'Simple chat for coax pet project',
   type: 'website',
-  image: 'dsf/banner.jpg',
+  // TODO: add url to site
+  image: '/banner.jpg',
   locale: 'en_US',
 };

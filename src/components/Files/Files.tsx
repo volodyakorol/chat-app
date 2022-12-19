@@ -1,6 +1,6 @@
 import { AudioFile, ImageFile, TextFile, VideoFile } from '@/components/';
 
-type PropsT = {
+type TFilesProps = {
   files: {
     src: string;
     filename: string;
@@ -8,12 +8,12 @@ type PropsT = {
   }[];
 };
 
-export const Files = ({ files }: PropsT) => {
-  const images = files.filter(({ mimetype }) => mimetype.split('/').at(0) === 'image');
-  const videos = files.filter(({ mimetype }) => mimetype.split('/').at(0) === 'video');
-  const audios = files.filter(({ mimetype }) => mimetype.split('/').at(0) === 'audio');
+export const Files = ({ files }: TFilesProps) => {
+  const images = files.filter(({ mimetype }) => mimetype.startsWith('image'));
+  const videos = files.filter(({ mimetype }) => mimetype.startsWith('video'));
+  const audios = files.filter(({ mimetype }) => mimetype.startsWith('audio'));
   const docs = files
-    .filter(({ mimetype }) => mimetype.split('/').at(0) === 'application')
+    .filter(({ mimetype }) => mimetype.startsWith('application'))
     .map((doc) => ({ ...doc, filetype: doc.filename.split('.').at(-1) ?? '' }));
 
   return (

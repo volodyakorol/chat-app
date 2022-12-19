@@ -7,8 +7,9 @@ const socket: Socket<TSocketOnTypes, TSocketEmitTypes> = io(process.env.NEXT_PUB
   withCredentials: true,
 });
 
+// TODO: доробити сокети
 // https://codesandbox.io/s/piffv?file=/src/pages/api/socketio.ts:164-173
-export default function useSocket<K extends keyof TSocketOnTypes, F = TSocketOnTypes[K]>(eventName?: K, cb?: F) {
+export function useSocket<K extends keyof TSocketOnTypes, F = TSocketOnTypes[K]>(eventName?: K, cb?: F) {
   useEffect(() => {
     if (eventName) socket.on(eventName, cb as any);
 

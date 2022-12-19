@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query';
 
 import { groupApi } from '@/shared/api';
-import { UpdateGroupDetailsPayload } from '@/shared/types';
+import { TUpdateGroupDetailsPayload } from '@/shared/types';
 
 export const useUpdateGroupDetails = () => {
-  const { mutate, ...rest } = useMutation(['update-group-details'], (data: UpdateGroupDetailsPayload) =>
+  const { mutate, ...rest } = useMutation(['update-group-details'], (data: TUpdateGroupDetailsPayload) =>
     groupApi.updateGroupDetails(data),
   );
 

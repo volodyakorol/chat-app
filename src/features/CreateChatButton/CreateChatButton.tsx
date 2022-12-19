@@ -1,10 +1,10 @@
-import { useCreateConversation, useGetFriends } from '@/shared/reactQueries';
 import React, { useState } from 'react';
 import { Button, Input, List, Modal } from 'antd';
 
 import { UserItem } from '@/components';
+import { useCreateConversation, useGetFriends } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export const CreateChatButton = () => {
   const [open, setOpen] = useState(false);
@@ -22,7 +22,7 @@ export const CreateChatButton = () => {
 
   return (
     <>
-      <Button className={s.createChat} type='primary' onClick={openModal}>
+      <Button className={styles.createChat} type='primary' onClick={openModal}>
         Create chat
       </Button>
       <Modal
@@ -34,7 +34,7 @@ export const CreateChatButton = () => {
       >
         <Input placeholder='Enter message' value={email} onChange={(event) => setEmail(event.target.value)} />
         <List
-          className={s.list}
+          className={styles.list}
           itemLayout='horizontal'
           loading={isLoading}
           dataSource={filteredFriends}

@@ -1,5 +1,4 @@
 new lib:
-- package.json
+  - package.json
 changelog unchanged:
-- all: ["!CHANGELOG.md"]
-
+  - all: ['!CHANGELOG.md']

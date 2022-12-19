@@ -1,12 +1,11 @@
-import { useCreateGroupMessage, useGetGroupMessages, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 
 import { Conversation, UserMessage } from '@/components';
 import { CreateChatButton } from '@/features';
-import useSocket from '@/shared/hook/useSocket';
+import { useGetGroupMessages, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
 import { GroupAside, MessageInput } from '@/widgets';
 
 import s from './styles.module.scss';
@@ -15,13 +14,8 @@ export default function Groups() {
   const [selectedChat, setSelectedChat] = useState(0);
   const isOpenChat = !!selectedChat;
 
-  const socket = useSocket('onMessage', (newMessage) => {
-    // setNewMessages((prev) => [...prev, newMessage]);
-  });
-
   const { data: userMe } = useGetUserMe();
   const { data: groups = [] } = useGetGroups();
-  const { createGroupMessage } = useCreateGroupMessage();
   const { data: groupMessages } = useGetGroupMessages({ id: selectedChat }, { enabled: isOpenChat });
 
   const messages = groupMessages?.messages;
@@ -80,7 +74,7 @@ export default function Groups() {
                 ))}
               </div>
               <div>
-                <MessageInput onSend={() => {}} />
+                <MessageInput onSend={() => alert('soon to be')} />
               </div>
             </div>
           </div>

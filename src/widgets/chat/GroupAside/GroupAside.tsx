@@ -1,11 +1,11 @@
-import { useGetGroup } from '@/shared/reactQueries';
 import { faHourglassStart, faMessage, faUsers } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
 
 import { InfoItem, UserItem } from '@/components';
 import { UserAvatar } from '@/features';
+import { useGetGroup } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type TGroupAsideProps = {
   selectedGroup: number;
@@ -19,12 +19,12 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
   const members = users?.filter(({ id }) => id !== owner?.id);
 
   return (
-    <div className={s.groupAside}>
-      <div className={s.asideHeader}>
+    <div className={styles.groupAside}>
+      <div className={styles.asideHeader}>
         <UserAvatar size={140} src={avatar} />
         <h3>{title}</h3>
       </div>
-      <div className={s.block}>
+      <div className={styles.block}>
         <InfoItem
           icon={faHourglassStart}
           label='CreatedAt:'
@@ -39,7 +39,7 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
         <InfoItem icon={faMessage} label='Messages:' info={messages?.length} />
       </div>
       <div className='divider' />
-      <div className={s.block}>
+      <div className={styles.block}>
         <h4>Owner</h4>
         {!!ownerUser && (
           <UserItem

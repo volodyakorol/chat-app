@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-import { render } from '@testing-library/react';
 import { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
+import { render } from '@testing-library/react';
 
 export const createTestQueryClient = () =>
   new QueryClient({

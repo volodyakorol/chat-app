@@ -1,19 +1,19 @@
+import { useState } from 'react';
+import { faPhone } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import dayjs from 'dayjs';
+
+import { Conversation, UserMessage } from '@/components';
+import { CreateChatButton } from '@/features';
 import {
   useCreateConversationMessage,
   useGetConversationMessages,
   useGetConversations,
   useGetUserMe,
 } from '@/shared/reactQueries';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import dayjs from 'dayjs';
-
-import { Conversation, UserMessage } from '@/components';
-import { CreateChatButton } from '@/features';
 import { MessageInput, UserAside } from '@/widgets';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export default function Chat() {
   const [selectedChat, setSelectedChat] = useState(0);
@@ -27,9 +27,9 @@ export default function Chat() {
   });
 
   return (
-    <div className={s.content}>
-      <div className={s.chats}>
-        <div className={s.createButton}>
+    <div className={styles.content}>
+      <div className={styles.chats}>
+        <div className={styles.createButton}>
           <CreateChatButton />
         </div>
         <div>
@@ -53,14 +53,14 @@ export default function Chat() {
 
       {isOpenChat ? (
         <>
-          <div className={s.chat}>
-            <div className={s.chatHeader}>
-              <div className={s.chatActions}>
+          <div className={styles.chat}>
+            <div className={styles.chatHeader}>
+              <div className={styles.chatActions}>
                 <FontAwesomeIcon fixedWidth={true} icon={faPhone} />
               </div>
             </div>
-            <div className={s.chatBody}>
-              <div className={s.messages}>
+            <div className={styles.chatBody}>
+              <div className={styles.messages}>
                 {conversationMessages?.messages?.map(({ id, author, content = '', createdAt, attachments }) => (
                   <UserMessage
                     key={id}
@@ -82,12 +82,12 @@ export default function Chat() {
             </div>
           </div>
 
-          <div className={s.aside}>
+          <div className={styles.aside}>
             <UserAside selectedChat={selectedChat} />
           </div>
         </>
       ) : (
-        <div className={s.notChat}>
+        <div className={styles.notChat}>
           <h1>Select chat</h1>
         </div>
       )}

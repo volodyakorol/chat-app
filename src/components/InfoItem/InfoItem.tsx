@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ReactNode } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type TInfoItemProps = {
   icon: IconProp;
@@ -14,9 +14,9 @@ export const InfoItem = ({ icon, info, label }: TInfoItemProps) => {
   if (!info) return null;
 
   return (
-    <div className={s.infoItem}>
-      <FontAwesomeIcon className={s.socialIcon} icon={icon} />
-      <p className={s.content}>
+    <div className={styles.infoItem}>
+      <FontAwesomeIcon className={styles.socialIcon} icon={icon} />
+      <p className={styles.content}>
         {label} {info}
       </p>
     </div>

@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query';
 
 import { groupApi } from '@/shared/api';
-import { RemoveGroupRecipientParams } from '@/shared/types';
+import { TRemoveGroupRecipientParams } from '@/shared/types';
 
 export const useRemoveGroupRecipient = () => {
-  const { mutate, ...rest } = useMutation(['remove-recipient'], (data: RemoveGroupRecipientParams) =>
+  const { mutate, ...rest } = useMutation(['remove-recipient'], (data: TRemoveGroupRecipientParams) =>
     groupApi.removeGroupRecipient(data),
   );
 

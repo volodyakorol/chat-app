@@ -1,5 +1,5 @@
-import { User } from '@/shared/types';
+import { TUser } from '@/shared/types';
 
-export const resolveFriend = (sender: User, receiver: User, myId?: number) => {
+export const resolveFriend = (sender: TUser, receiver: TUser, myId?: number) => {
   return myId !== sender.id ? sender : receiver;
 };

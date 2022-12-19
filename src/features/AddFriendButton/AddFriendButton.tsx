@@ -1,10 +1,10 @@
-import { useCreateFriendRequest, useSearchUsers } from '@/shared/reactQueries';
 import React, { useState } from 'react';
 import { Button, List, Modal } from 'antd';
 
 import { Input, UserItem } from '@/components';
+import { useCreateFriendRequest, useSearchUsers } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export const AddFriendButton = () => {
   const [open, setOpen] = useState(false);
@@ -27,7 +27,7 @@ export const AddFriendButton = () => {
         onCancel={closeModal}
       >
         <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />
-        <div className={s.selectedUsers}>
+        <div className={styles.selectedUsers}>
           <List
             itemLayout='horizontal'
             loading={isLoading}

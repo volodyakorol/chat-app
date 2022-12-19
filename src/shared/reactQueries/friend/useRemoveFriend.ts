@@ -1,8 +1,8 @@
-import { getFriendsQueryKeys } from '@/shared/reactQueries/friend/keys';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { friendsApi } from '@/shared/api';
-import { Friend, TIdRequest } from '@/shared/types';
+import { getFriendsQueryKeys } from '@/shared/reactQueries/friend/keys';
+import { TFriend, TIdRequest } from '@/shared/types';
 
 export const useRemoveFriend = () => {
   const queryClient = useQueryClient();
@@ -12,7 +12,7 @@ export const useRemoveFriend = () => {
       await queryClient.cancelQueries(getFriendsQueryKeys);
       const prevData = queryClient.getQueryData(getFriendsQueryKeys);
 
-      queryClient.setQueryData<Friend[] | undefined>(
+      queryClient.setQueryData<TFriend[] | undefined>(
         getFriendsQueryKeys,
         (data) => data && data.filter((friend) => friend.id !== id),
       );

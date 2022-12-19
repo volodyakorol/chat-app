@@ -1,12 +1,12 @@
-import { useLogin, useRegister } from '@/shared/reactQueries';
 import { useState } from 'react';
 import { Button, Form, Input, notification } from 'antd';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
 import { GoogleAuthButton } from '@/features';
+import { useLogin, useRegister } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type TAuthTabs = 'login' | 'register';
 
@@ -19,6 +19,7 @@ export default function Auth() {
       router.push('/chats');
     },
   });
+
   const { register } = useRegister({
     onSuccess: () => {
       notification.success({ message: 'Register success', description: 'Please login' });
@@ -26,19 +27,19 @@ export default function Auth() {
   });
 
   return (
-    <div className={s.app}>
-      <div className={s.content}>
+    <div className={styles.app}>
+      <div className={styles.content}>
         <h3>{tab === 'login' ? 'Sign in' : 'Sign Up'}</h3>
-        <div className={s.tabs}>
-          <div onClick={() => setTab('login')} className={clsx(s.tab, { [s.active]: tab === 'login' })}>
+        <div className={styles.tabs}>
+          <div onClick={() => setTab('login')} className={clsx(styles.tab, { [styles.active]: tab === 'login' })}>
             login
           </div>
-          <div onClick={() => setTab('register')} className={clsx(s.tab, { [s.active]: tab === 'register' })}>
+          <div onClick={() => setTab('register')} className={clsx(styles.tab, { [styles.active]: tab === 'register' })}>
             register
           </div>
         </div>
 
-        <div className={s.form}>
+        <div className={styles.form}>
           {tab === 'login' ? (
             <Form
               name='basic'

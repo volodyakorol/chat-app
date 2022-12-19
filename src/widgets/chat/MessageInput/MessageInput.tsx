@@ -1,11 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
 import { faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notification } from 'antd';
 
 import { Files, Input } from '@/components';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 const MAX_FILES = 3;
 
@@ -14,8 +14,8 @@ type TMessageInputProps = {
 };
 
 export const MessageInput = ({ onSend }: TMessageInputProps) => {
-  const [attachments, setAttachments] = useState<File[]>([]);
   const [content, setContent] = useState('');
+  const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const onAttachmentClick = () => fileInputRef.current?.click();
@@ -36,7 +36,7 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
   return (
     <>
       {!!attachments.length && (
-        <div className={s.attachments}>
+        <div className={styles.attachments}>
           <Files
             files={attachments.map((file) => ({
               filename: file.name,
@@ -46,6 +46,7 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
           />
         </div>
       )}
+
       <Input
         size='large'
         placeholder='Type something'
@@ -57,7 +58,7 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
       />
       <input
         ref={fileInputRef}
-        className={s.hidedInput}
+        className={styles.hidedInput}
         type='file'
         accept='image/*,application/*,video/*,audio/*'
         onChange={onAttachmentChange}

@@ -1,10 +1,10 @@
 import { useMutation } from 'react-query';
 
 import { groupApi } from '@/shared/api';
-import { AddGroupRecipientParams } from '@/shared/types';
+import { TAddGroupRecipientParams } from '@/shared/types';
 
 export const useAddGroupRecipient = () => {
-  const { mutate, ...rest } = useMutation(['add-recipient'], (data: AddGroupRecipientParams) =>
+  const { mutate, ...rest } = useMutation(['add-recipient'], (data: TAddGroupRecipientParams) =>
     groupApi.addGroupRecipient(data),
   );
 

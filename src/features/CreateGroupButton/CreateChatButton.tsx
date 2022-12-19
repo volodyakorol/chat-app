@@ -1,8 +1,8 @@
-import { useCreateConversation, useCreateGroup, useSearchUsers } from '@/shared/reactQueries';
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 
 import { Input, UserList } from '@/components';
+import { useCreateGroup, useSearchUsers } from '@/shared/reactQueries';
 
 import s from './styles.module.scss';
 
@@ -10,11 +10,9 @@ export const CreateChatButton = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
   const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState<{ label: string; email: string }[]>([]);
-  const isGroupChat = selectedUsers.length > 1;
 
-  const { createConversation } = useCreateConversation();
+  const [selectedUsers, setSelectedUsers] = useState<{ label: string; email: string }[]>([]);
+
   const { createGroup } = useCreateGroup();
   const { data = [], isLoading } = useSearchUsers({ query: value });
 
@@ -23,9 +21,7 @@ export const CreateChatButton = () => {
 
   const handleSubmit = () =>
     selectedUsers.length &&
-    (isGroupChat
-      ? createGroup({ users: selectedUsers.map(({ email }) => email), title }, { onSuccess: closeModal })
-      : createConversation({ email: selectedUsers[0]?.email, message }, { onSuccess: closeModal }));
+    createGroup({ users: selectedUsers.map(({ email }) => email), title }, { onSuccess: closeModal });
 
   return (
     <>
@@ -35,15 +31,13 @@ export const CreateChatButton = () => {
       <Modal data-testid='add-friend-modal' title='Add friend' open={open} onOk={handleSubmit} onCancel={closeModal}>
         <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />
         <div className={s.groupTitle}>
-          {isGroupChat ? (
-            <Input placeholder='Enter group title' value={title} onChange={(event) => setTitle(event.target.value)} />
-          ) : (
-            <Input placeholder='Enter message' value={message} onChange={(event) => setMessage(event.target.value)} />
-          )}
+          <Input placeholder='Enter group title' value={title} onChange={(event) => setTitle(event.target.value)} />
         </div>
+
         {selectedUsers.map(({ email }) => (
           <p key={email}>{email}</p>
         ))}
+
         <div className={s.selectedUsers}>
           <UserList
             isLoading={isLoading}
@@ -57,7 +51,7 @@ export const CreateChatButton = () => {
         <div>кроки 1 -2</div>
         <UserList
           isLoading={isLoading}
-          users={data }
+          users={data}
           onSelectUser={({ firstName, lastName, email }) =>
             setSelectedUsers((prev) => [...prev, { label: `${firstName} ${lastName}`, email }])
           }
