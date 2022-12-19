@@ -5,7 +5,6 @@ import {
   FixedCropperProps,
   FixedCropperRef,
   FixedCropperSettings,
-  ImageRestriction,
 } from 'react-advanced-cropper';
 import { CloudUploadOutlined, RotateLeftOutlined, RotateRightOutlined, SwapOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
@@ -87,10 +86,8 @@ export const ImageCropper = forwardRef<FixedCropperRef, PropsT>(({ src, actions,
             ref={cropperRef}
             className={stylesheet.cropper}
             stencilComponent={CircleStencil}
-            imageRestriction={ImageRestriction.fitArea}
             style={{ minHeight: cropActions.length * 40 + 80 }}
-            {...({} as FixedCropperSettings)}
-            {...props}
+            {...(props as FixedCropperSettings)}
           />
 
           <div className={stylesheet.actions}>

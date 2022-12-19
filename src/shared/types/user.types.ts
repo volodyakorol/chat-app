@@ -32,3 +32,9 @@ export type StatusMessage = {
 export type TSearchUserRequest = {
   query: string;
 };
+
+export type UpdateUserProfile = {
+  banner?: File;
+  avatar?: File;
+  about?: string;
+};

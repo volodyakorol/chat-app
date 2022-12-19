@@ -12,7 +12,6 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^~/(.*)$': '<rootDir>/public/$1',
-    axios: 'axios/dist/node/axios.cjs',
   },
 };
 

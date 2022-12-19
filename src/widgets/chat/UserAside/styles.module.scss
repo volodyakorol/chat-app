@@ -1,0 +1,33 @@
+.aside {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 20px;
+  background-color: #102678;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.asideHeader {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 10px;
+
+  & h3 {
+    color: #fff;
+  }
+}
+
+.infoBlock {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}
+
+.userAbout {
+  overflow: hidden;
+  color: white;
+}

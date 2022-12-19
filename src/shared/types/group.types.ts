@@ -1,4 +1,8 @@
-import { Conversation, User } from '@/shared/types';
+import { Attachment, Conversation, User } from '@/shared/types';
+
+export type TGroupId = {
+  groupId: number | string;
+};
 
 export type MessageType = {
   id: number;
@@ -6,6 +10,15 @@ export type MessageType = {
   createdAt: string;
   author: User;
   conversation: Conversation;
+  attachments?: MessageAttachment[];
+};
+
+export type GroupMessageType = {
+  id: number;
+  content?: string;
+  createdAt: string;
+  author: User;
+  group: Group;
   attachments?: MessageAttachment[];
 };
 
@@ -18,7 +31,7 @@ export type Group = {
   messages: GroupMessageType[];
   createdAt: number;
   lastMessageSent: MessageType;
-  lastMessageSentAt: Date;
+  lastMessageSentAt: string;
   avatar?: string;
 };
 
@@ -49,15 +62,6 @@ export type EditMessagePayload = {
 };
 export type MessageAttachment = {
   key: string;
-};
-
-export type GroupMessageType = {
-  id: number;
-  content?: string;
-  createdAt: string;
-  author: User;
-  group: Group;
-  attachments?: MessageAttachment[];
 };
 
 export type CreateGroupParams = {
@@ -106,4 +110,10 @@ export type UpdateGroupPayload = {
 export type GroupParticipantLeftPayload = {
   group: Group;
   userId: number;
+};
+
+export type TCreateGroupMessage = {
+  attachments?: Attachment[];
+  groupId: number;
+  content: string;
 };

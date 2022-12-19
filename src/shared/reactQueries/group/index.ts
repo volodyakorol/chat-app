@@ -1,5 +1,6 @@
 export * from './useAddGroupRecipient';
 export * from './useCreateGroup';
+export * from './useCreateGroupMessage';
 export * from './useDeleteGroupMessage';
 export * from './useEditGroupMessage';
 export * from './useGetGroup';

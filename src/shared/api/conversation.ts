@@ -1,5 +1,5 @@
 import { api } from '@/shared/api';
-import { EditMessagePayload, MessageType } from '@/shared/types';
+import { EditMessagePayload, MessageType, TCreateMessage } from '@/shared/types';
 
 import { CreateConversationParams, DeleteMessageParams, DeleteMessageResponse } from '../types/conversation.types';
 
@@ -12,12 +12,19 @@ export const conversationsApi = {
   getConversationMessages: (conversationId: number) =>
     api.get(`/conversations/${conversationId}/messages`).then((res) => res.data),
 
-  // createMessage: (id: string, data: FormData) =>
-  //   api
-  //     .post(`/conversations/${id}/messages`, data, {
-  //       headers: { 'Content-Type': 'multipart/form-data' },
-  //     })
-  //     .then((res) => res.data),
+  createMessage: ({ attachments, conversationId, content }: TCreateMessage) => {
+    const formData = new FormData();
+    formData.append('id', String(conversationId));
+    formData.append('content', content);
+
+    attachments && attachments.forEach((attachment) => formData.append('attachments', attachment));
+
+    return api
+      .post(`/conversations/${conversationId}/messages`, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      })
+      .then((res) => res.data);
+  },
 
   createNewConversation: (data: CreateConversationParams) => api.post('/conversations', data).then((res) => res.data),
 

@@ -10,6 +10,7 @@ import {
   Group,
   GroupMessageType,
   RemoveGroupRecipientParams,
+  TCreateGroupMessage,
   TIdRequest,
   UpdateGroupDetailsPayload,
   UpdateGroupOwnerParams,
@@ -48,9 +49,14 @@ export const groupApi = {
   updateGroupDetails: ({ id, data }: UpdateGroupDetailsPayload) =>
     api.patch<Group>(`/groups/${id}/details`, data).then((res) => res.data),
 
-  createGroupMessage: (id: string, data: FormData) => {
+  createGroupMessage: ({ attachments, groupId, content }: TCreateGroupMessage) => {
+    const formData = new FormData();
+    formData.append('id', String(groupId));
+    formData.append('content', content);
+    attachments && attachments.forEach((attachment) => formData.append('attachments', attachment.file));
+
     return api
-      .post(`/groups/${id}/messages`, data, {
+      .post(`/groups/${groupId}/messages`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       })
       .then((res) => res.data);
