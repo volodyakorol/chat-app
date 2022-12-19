@@ -1,0 +1,24 @@
+.modalBody {
+  padding: 35px 0;
+}
+
+.selectedUsers {
+  margin-top: 10px;
+  height: 300px;
+  overflow: auto;
+}
+
+.obg {
+  & svg {
+    fill: red;
+  }
+}
+
+.groupTitle {
+  margin-top: 10px;
+}
+
+.createChat {
+  width: 100%;
+  margin-top: 10px;
+}

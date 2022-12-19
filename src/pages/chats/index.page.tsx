@@ -33,7 +33,7 @@ export default function Chat() {
           <CreateChatButton />
         </div>
         <div>
-          {chats.map(({ id, lastMessageSent, lastMessageSentAt, recipient, creator }) => {
+          {chats.reverse().map(({ id, lastMessageSent, lastMessageSentAt, recipient, creator }) => {
             const { firstName, lastName, profile } = userMe?.id === recipient.id ? creator : recipient;
 
             return (
@@ -61,17 +61,18 @@ export default function Chat() {
             </div>
             <div className={s.chatBody}>
               <div className={s.messages}>
-                {conversationMessages?.messages?.reverse()?.map(({ id, author, content = '', createdAt }) => (
+                {conversationMessages?.messages?.map(({ id, author, content = '', createdAt, attachments }) => (
                   <UserMessage
                     key={id}
                     avatar={author.profile?.avatar}
+                    attachments={attachments}
                     isMyMessage={author.id === userMe?.id}
                     message={content}
                     time={dayjs(createdAt).format('h:mm a')}
                   />
                 ))}
               </div>
-              <div className={s.inputContainer}>
+              <div>
                 <MessageInput
                   onSend={(content, attachments) =>
                     createConversationMessage({ content, attachments, conversationId: selectedChat })

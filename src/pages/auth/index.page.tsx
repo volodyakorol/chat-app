@@ -16,7 +16,7 @@ export default function Auth() {
 
   const { login } = useLogin({
     onSuccess: () => {
-      router.push('/chat');
+      router.push('/chats');
     },
   });
   const { register } = useRegister({

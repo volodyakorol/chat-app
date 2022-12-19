@@ -23,7 +23,7 @@ export const AddFriendButton = () => {
         data-testid='add-friend-modal'
         title='Add friend'
         open={open}
-        okButtonProps={{ hidden: true }}
+        okButtonProps={{ style: { display: 'none' } }}
         onCancel={closeModal}
       >
         <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />

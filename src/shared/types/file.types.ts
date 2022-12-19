@@ -1,13 +1,12 @@
-export type TFileType = 'image' | 'video' | 'audio' | 'doc' | 'presentation' | 'archive' | 'raw' | 'other';
+export type TFileType = 'image' | 'video' | 'audio' | 'application';
 
 export type TFile = {
-  id: number;
-  file: string;
-  name: string;
-  document_type: TFileType;
-  owner: number;
+  key: number;
+  fileType: TFileType;
+  originalname: string;
 };
 
 export type TFileProps = {
-  files: TFile[];
+  filename: string;
+  src: string;
 };

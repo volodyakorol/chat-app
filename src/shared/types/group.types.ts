@@ -62,6 +62,8 @@ export type EditMessagePayload = {
 };
 export type MessageAttachment = {
   key: string;
+  fileType: string;
+  originalname: string;
 };
 
 export type CreateGroupParams = {

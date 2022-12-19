@@ -8,15 +8,18 @@
 .file {
   width: 100%;
   min-height: 40px;
-  border-bottom: 1px solid var(--color-tertiary);
+  border: 2px solid rgba(25, 132, 181, 0.596);
   display: flex;
   align-items: center;
   padding: 5px;
+  background: rgb(255, 255, 255);
+  color: black;
 }
 
 .icon {
   font-size: 18px;
   margin-right: 10px;
+  color: rgb(25, 138, 191);
 }
 
 .name {

@@ -2,7 +2,6 @@ import { useCreateGroupMessage, useGetGroupMessages, useGetGroups, useGetUserMe 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { Button } from 'antd';
 import dayjs from 'dayjs';
 
 import { Conversation, UserMessage } from '@/components';
@@ -29,7 +28,6 @@ export default function Groups() {
 
   return (
     <div className={s.content}>
-      <Button onClick={() => createGroupMessage({ groupId: selectedChat, content: 'hi' })}>dsf</Button>
       <div className={s.chats}>
         <div className={s.createButton}>
           <CreateChatButton />
@@ -81,7 +79,7 @@ export default function Groups() {
                   />
                 ))}
               </div>
-              <div className={s.inputContainer}>
+              <div>
                 <MessageInput onSend={() => {}} />
               </div>
             </div>

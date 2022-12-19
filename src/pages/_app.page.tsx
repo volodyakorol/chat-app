@@ -40,13 +40,14 @@ export default function App({ Component, pageProps }: AppProps<{ dehydratedState
       }),
   );
 
-  //! мб перенести нище в квері провайдер
   useSocket('onMessage', async ({ conversation, message }) => {
     await queryClient.cancelQueries(['get-conversation-messages', conversation.id]);
 
     queryClient.setQueryData<GetMessagesResponse | undefined>(
       ['get-conversation-messages', conversation.id],
-      (data) => data && { ...data, messages: [...data.messages, message] },
+      (data) => {
+        return data && { ...data, messages: [ ...data.messages, message] };
+      },
     );
   });
 

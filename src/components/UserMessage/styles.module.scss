@@ -6,7 +6,7 @@
   }
 }
 
-.message {
+.messageContainer {
   max-width: 70%;
   margin: 0 20px;
   display: flex;
@@ -17,7 +17,7 @@
   }
 }
 
-.text {
+.message {
   padding: 15px 20px;
   border-radius: 20px;
   border-top-left-radius: 0px;
@@ -25,10 +25,14 @@
   color: white;
   font-size: 14px;
   line-height: 14px;
+  word-break: break-all;
 
   &.me {
     border-radius: 20px;
     border-top-right-radius: 0px;
+  }
+  & p {
+    padding-bottom: 10px;
   }
 }
 

@@ -5,9 +5,8 @@ export type HandleFriendRequestAction = 'accept' | 'reject' | 'cancel';
 
 export type Friend = {
   id: number;
-  sender: User;
-  receiver: User;
-  createdAt: number;
+  friend: User;
+  createdAt: string;
 };
 
 export type FriendRequest = {

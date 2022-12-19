@@ -10,13 +10,13 @@ import { Button, List, Tabs } from 'antd';
 
 import { UserItem } from '@/components';
 import { AddFriendButton } from '@/features';
-import { User } from '@/shared/types';
+import { resolveFriend } from '@/shared/lib';
 
 import s from './styles.module.scss';
 
 type TTab = 'friends' | 'request';
 
-export default function Home() {
+export default function Friends() {
   const [tab, setTab] = useState<TTab>('friends');
   const isFriendsTab = tab === 'friends';
 
@@ -26,10 +26,6 @@ export default function Home() {
 
   const { rejectRequest } = useRejectFriendRequest();
   const { acceptRequest } = useAcceptFriendRequest();
-
-  const resolveFriend = (sender: User, receiver: User) => {
-    return userMe?.id !== sender.id ? sender : receiver;
-  };
 
   return (
     <div className={s.screen}>
@@ -47,8 +43,8 @@ export default function Home() {
               itemLayout='horizontal'
               loading={isLoading}
               dataSource={friends}
-              renderItem={({ id, receiver, sender }) => {
-                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver);
+              renderItem={({ id, friend }) => {
+                const { firstName, lastName, email, profile } = friend;
 
                 return (
                   <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar} />
@@ -65,7 +61,7 @@ export default function Home() {
               loading={isLoading}
               dataSource={requests}
               renderItem={({ id, receiver, sender }) => {
-                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver);
+                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver, userMe?.id);
 
                 return (
                   <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>

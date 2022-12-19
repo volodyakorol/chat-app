@@ -4,12 +4,12 @@ import { TFileProps } from '@/shared/types/file.types';
 
 import stylesheet from './styles.module.scss';
 
-export const ImageFile = ({ files }: TFileProps) => (
+export const ImageFile = ({ files }: { files: TFileProps[] }) => (
   <Image.PreviewGroup>
     <div className={stylesheet.images}>
-      {files.map(({ file, id, name }) => (
-        <div key={id} className={stylesheet.image_wrapper}>
-          <Image alt={name} src={file} />
+      {files.map(({ filename, src }, index) => (
+        <div key={index} className={stylesheet.image_wrapper}>
+          <Image alt={filename} src={src} />
         </div>
       ))}
     </div>
