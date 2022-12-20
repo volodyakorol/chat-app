@@ -1,4 +1,4 @@
-import { faHourglassStart, faMessage, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faHourglassStart, faUsers } from '@fortawesome/free-solid-svg-icons';
 import dayjs from 'dayjs';
 
 import { InfoItem, UserItem } from '@/components';
@@ -13,7 +13,7 @@ type TGroupAsideProps = {
 
 export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
   const { data } = useGetGroup({ id: selectedGroup });
-  const { createdAt, owner, users, avatar, title, messages } = data ?? {};
+  const { createdAt, owner, users, avatar, title } = data ?? {};
 
   const ownerUser = users?.find(({ id }) => id === owner?.id);
   const members = users?.filter(({ id }) => id !== owner?.id);
@@ -36,7 +36,6 @@ export const GroupAside = ({ selectedGroup }: TGroupAsideProps) => {
           }
         />
         <InfoItem icon={faUsers} label='Users:' info={users?.length} />
-        <InfoItem icon={faMessage} label='Messages:' info={messages?.length} />
       </div>
       <div className='divider' />
       <div className={styles.block}>
