@@ -1,68 +1,53 @@
 import { useState } from 'react';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 
 import { Conversation, UserMessage } from '@/components';
-import { CreateChatButton } from '@/features';
-import { useGetGroupMessages, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
+import { CreateGroupButton } from '@/features';
+import { useCreateGroupMessage, useGetGroupMessages, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
 import { GroupAside, MessageInput } from '@/widgets';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export default function Groups() {
-  const [selectedChat, setSelectedChat] = useState(0);
-  const isOpenChat = !!selectedChat;
+  const [selectedGroup, setSelectedGroup] = useState(0);
+  const isOpenGroup = !!selectedGroup;
 
   const { data: userMe } = useGetUserMe();
   const { data: groups = [] } = useGetGroups();
-  const { data: groupMessages } = useGetGroupMessages({ id: selectedChat }, { enabled: isOpenChat });
-
+  const { createGroupMessage } = useCreateGroupMessage();
+  const { data: groupMessages } = useGetGroupMessages({ id: selectedGroup }, { enabled: isOpenGroup });
   const messages = groupMessages?.messages;
 
   return (
-    <div className={s.content}>
-      <div className={s.chats}>
-        <div className={s.createButton}>
-          <CreateChatButton />
+    <div className={styles.content}>
+      <div className={styles.chats}>
+        <div className={styles.createButton}>
+          <CreateGroupButton />
         </div>
         <div>
+          {!!groups.length || <div style={{ width: 100, height: 100, backgroundColor: 'red' }}>sdf</div>}
           {groups.map(({ id, lastMessageSent, lastMessageSentAt, avatar, title }) => {
-            const { content, author } = lastMessageSent ?? {};
+            const { content } = lastMessageSent ?? {};
 
             return (
               <Conversation
                 key={id}
                 time={dayjs(lastMessageSentAt).format('h:mm a')}
                 title={title}
-                isActive={selectedChat === id}
+                isActive={selectedGroup === id}
                 avatar={avatar}
-                description={
-                  lastMessageSent ? (
-                    <>
-                      <b>{author.firstName}</b>
-                      {content}
-                    </>
-                  ) : (
-                    'you was invited to this group'
-                  )
-                }
-                onClick={() => setSelectedChat(id)}
+                description={lastMessageSent ? content : 'you was invited to this group'}
+                onClick={() => setSelectedGroup(id)}
               />
             );
           })}
         </div>
       </div>
-      {isOpenChat ? (
+      {isOpenGroup ? (
         <>
-          <div className={s.chat}>
-            <div className={s.chatHeader}>
-              <div className={s.chatActions}>
-                <FontAwesomeIcon fixedWidth={true} icon={faPhone} />
-              </div>
-            </div>
-            <div className={s.chatBody}>
-              <div className={s.messages}>
+          <div className={styles.chat}>
+            <div className={styles.chatBody}>
+              <div className={styles.messages}>
                 {messages?.map(({ id, author, content = '', createdAt }) => (
                   <UserMessage
                     key={id}
@@ -74,18 +59,22 @@ export default function Groups() {
                 ))}
               </div>
               <div>
-                <MessageInput onSend={() => alert('soon to be')} />
+                <MessageInput
+                  onSend={(content, attachments) =>
+                    createGroupMessage({ content, attachments, groupId: selectedGroup })
+                  }
+                />
               </div>
             </div>
           </div>
 
-          <div className={s.aside}>
-            <GroupAside selectedGroup={selectedChat} />
+          <div className={styles.aside}>
+            <GroupAside selectedGroup={selectedGroup} />
           </div>
         </>
       ) : (
-        <div className={s.notChat}>
-          <h1>Select chat</h1>
+        <div className={styles.notChat}>
+          <h1>Select group</h1>
         </div>
       )}
     </div>

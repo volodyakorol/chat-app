@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import { faPhone } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 
 import { Conversation, UserMessage } from '@/components';
@@ -33,7 +31,7 @@ export default function Chat() {
           <CreateChatButton />
         </div>
         <div>
-          {chats.reverse().map(({ id, lastMessageSent, lastMessageSentAt, recipient, creator }) => {
+          {chats.map(({ id, lastMessageSent, lastMessageSentAt, recipient, creator }) => {
             const { firstName, lastName, profile } = userMe?.id === recipient.id ? creator : recipient;
 
             return (
@@ -54,11 +52,6 @@ export default function Chat() {
       {isOpenChat ? (
         <>
           <div className={styles.chat}>
-            <div className={styles.chatHeader}>
-              <div className={styles.chatActions}>
-                <FontAwesomeIcon fixedWidth={true} icon={faPhone} />
-              </div>
-            </div>
             <div className={styles.chatBody}>
               <div className={styles.messages}>
                 {conversationMessages?.messages?.map(({ id, author, content = '', createdAt, attachments }) => (

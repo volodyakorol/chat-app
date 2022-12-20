@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 import { InfoItem } from '@/components';
 import { UserAvatar } from '@/features';
-import { useGetConversationById } from '@/shared/reactQueries';
+import { useGetConversationById, useGetUserMe } from '@/shared/reactQueries';
 
 import styles from './styles.module.scss';
 
@@ -13,9 +13,10 @@ type TUserAsideProps = {
 };
 
 export const UserAside = ({ selectedChat }: TUserAsideProps) => {
+  const { data: userMe } = useGetUserMe();
   const { data } = useGetConversationById(selectedChat);
   const { createdAt, creator, recipient } = data ?? {};
-  const { firstName, lastName, email, profile } = recipient ?? {};
+  const { firstName, lastName, email, profile } = (userMe?.id !== recipient?.id ? recipient : creator) ?? {};
 
   return (
     <div>

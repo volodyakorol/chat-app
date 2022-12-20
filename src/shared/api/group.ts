@@ -53,7 +53,7 @@ export const groupApi = {
     const formData = new FormData();
     formData.append('id', String(groupId));
     formData.append('content', content);
-    attachments && attachments.forEach((attachment) => formData.append('attachments', attachment.file));
+    attachments && attachments.forEach((attachment) => formData.append('attachments', attachment));
 
     return api
       .post(`/groups/${groupId}/messages`, formData, {
