@@ -7,4 +7,8 @@ import { TSearchUserRequest, TUser } from '@/shared/types';
 export const useSearchUsers = <T = TUser[]>(
   data: TSearchUserRequest,
   options?: UseQueryOptions<TUser[], AxiosError, T>,
-) => useQuery<TUser[], AxiosError, T>(['search-user', JSON.stringify(data)], () => userApi.searchUsers(data), options);
+) =>
+  useQuery<TUser[], AxiosError, T>(['search-user', JSON.stringify(data)], () => userApi.searchUsers(data), {
+    enabled: !!data.query,
+    ...options,
+  });

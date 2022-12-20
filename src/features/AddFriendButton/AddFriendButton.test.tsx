@@ -30,6 +30,4 @@ describe('AddFriendButton', () => {
 
     expect(await waitFor(() => screen.getByPlaceholderText(/enter email/i))).toHaveAttribute('value', 'hello');
   });
-
-  // TODO: додати мокані дані і зробити тест на список юзерів
 });

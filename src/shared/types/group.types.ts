@@ -1,4 +1,4 @@
-import { TAttachment, TConversation, TUser } from '@/shared/types';
+import { TConversation, TUser } from '@/shared/types';
 
 export type TGroupId = {
   groupId: number | string;
@@ -28,9 +28,8 @@ export type TGroup = {
   users: TUser[];
   creator: TUser;
   owner: TUser;
-  messages: TGroupMessageType[];
   createdAt: number;
-  lastMessageSent: TMessageType;
+  lastMessageSent: { content: string; createdAt: string; id: number };
   lastMessageSentAt: string;
   avatar?: string;
 };
@@ -107,7 +106,7 @@ export type GroupParticipantLeftPayload = {
 };
 
 export type TCreateGroupMessage = {
-  attachments?: TAttachment[];
+  attachments?: File[];
   groupId: number;
   content: string;
 };

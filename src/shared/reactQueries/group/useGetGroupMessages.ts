@@ -7,4 +7,5 @@ import { TFetchGroupMessagePayload, TIdRequest } from '@/shared/types';
 export const useGetGroupMessages = <T = TFetchGroupMessagePayload>(
   data: TIdRequest,
   options?: UseQueryOptions<TIdRequest, AxiosError, T>,
-) => useQuery<TIdRequest, AxiosError, T>(['get-group-messages'], () => groupApi.getGroupMessages(data), options);
+) =>
+  useQuery<TIdRequest, AxiosError, T>(['get-group-messages', data.id], () => groupApi.getGroupMessages(data), options);

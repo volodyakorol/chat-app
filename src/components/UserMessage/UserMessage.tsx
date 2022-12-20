@@ -22,14 +22,16 @@ export const UserMessage = ({ avatar, time, message, isMyMessage, attachments }:
       <div className={clsx(styles.messageContainer, { [styles.me]: isMyMessage })}>
         <div className={clsx(styles.message, { [styles.me]: isMyMessage })}>
           <p>{message}</p>
-          {attachments && (
-            <Files
-              files={attachments.map(({ fileType, originalname, key }) => ({
-                filename: originalname,
-                mimetype: fileType,
-                src: SDN_URL + key,
-              }))}
-            />
+          {!!attachments?.length && (
+            <div className={styles.attachments}>
+              <Files
+                files={attachments.map(({ fileType, originalname, key }) => ({
+                  filename: originalname,
+                  mimetype: fileType,
+                  src: SDN_URL + key,
+                }))}
+              />
+            </div>
           )}
         </div>
         <p className={styles.time}>{time}</p>
