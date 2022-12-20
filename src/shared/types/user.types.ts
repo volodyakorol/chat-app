@@ -1,31 +1,31 @@
-export type Profile = {
+export type TProfile = {
   id: number;
   about?: string;
   avatar?: string;
   banner?: string;
 };
 
-export type UserPresence = {
+export type TUserPresence = {
   id: number;
   statusMessage?: string;
   showOffline: boolean;
 };
 
-export type UserPeer = {
+export type TUserPeer = {
   id: string;
 };
 
-export type User = {
+export type TUser = {
   id: number;
   email: string;
   firstName: string;
   lastName: string;
-  profile?: Profile;
-  presence?: UserPresence;
-  peer: UserPeer;
+  profile?: TProfile;
+  presence?: TUserPresence;
+  peer: TUserPeer;
 };
 
-export type StatusMessage = {
+export type TStatusMessage = {
   statusMessage: string;
 };
 
@@ -33,7 +33,7 @@ export type TSearchUserRequest = {
   query: string;
 };
 
-export type UpdateUserProfile = {
+export type TUpdateUserProfile = {
   banner?: File;
   avatar?: File;
   about?: string;

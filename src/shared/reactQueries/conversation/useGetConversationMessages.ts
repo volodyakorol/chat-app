@@ -2,9 +2,9 @@ import { useQuery, UseQueryOptions } from 'react-query';
 import { AxiosError } from 'axios';
 
 import { conversationsApi } from '@/shared/api/conversation';
-import { GetMessagesResponse } from '@/shared/types/conversation.types';
+import { TGetMessagesResponse } from '@/shared/types/conversation.types';
 
-export const useGetConversationMessages = <T = GetMessagesResponse>(
+export const useGetConversationMessages = <T = TGetMessagesResponse>(
   conversationId: number,
   options?: UseQueryOptions<T, AxiosError>,
 ) =>

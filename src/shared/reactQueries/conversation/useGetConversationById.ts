@@ -2,9 +2,9 @@ import { useQuery, UseQueryOptions } from 'react-query';
 import { AxiosError } from 'axios';
 
 import { conversationsApi } from '@/shared/api/conversation';
-import { Conversation } from '@/shared/types/conversation.types';
+import { TConversation } from '@/shared/types/conversation.types';
 
-export const useGetConversationById = <T = Conversation>(
+export const useGetConversationById = <T = TConversation>(
   conversationId: number,
   options?: UseQueryOptions<T, AxiosError>,
 ) =>

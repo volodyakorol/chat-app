@@ -1,12 +1,11 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRef, useState } from 'react';
-import { faFloppyDisk, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faPaperclip, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { notification } from 'antd';
 
-import { Input } from '@/components';
-import { Files } from '@/components/Files';
+import { Files, Input } from '@/components';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 const MAX_FILES = 3;
 
@@ -15,8 +14,8 @@ type TMessageInputProps = {
 };
 
 export const MessageInput = ({ onSend }: TMessageInputProps) => {
-  const [attachments, setAttachments] = useState<File[]>([]);
   const [content, setContent] = useState('');
+  const [attachments, setAttachments] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const onAttachmentClick = () => fileInputRef.current?.click();
@@ -30,16 +29,24 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
 
   const onSentClick = () => {
     onSend(content, attachments);
+    setAttachments([]);
     setContent('');
   };
 
   return (
     <>
-      <div className={s.attachments}>
-        {/* {attachments.map(({ type }) => (
-          <Files type={type} />
-        ))} */}
-      </div>
+      {!!attachments.length && (
+        <div className={styles.attachments}>
+          <Files
+            files={attachments.map((file) => ({
+              filename: file.name,
+              src: URL.createObjectURL(file),
+              mimetype: file.type,
+            }))}
+          />
+        </div>
+      )}
+
       <Input
         size='large'
         placeholder='Type something'
@@ -47,13 +54,13 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
         value={content}
         onChange={(event) => setContent(event.target.value)}
         prefix={<FontAwesomeIcon className='pointer' onClick={onAttachmentClick} color='#C5C7D2' icon={faPaperclip} />}
-        addonAfter={<FontAwesomeIcon className='pointer' onClick={onSentClick} color='#C5C7D2' icon={faFloppyDisk} />}
+        addonAfter={<FontAwesomeIcon className='pointer' onClick={onSentClick} color='#C5C7D2' icon={faPaperPlane} />}
       />
       <input
         ref={fileInputRef}
-        className={s.hidedInput}
+        className={styles.hidedInput}
         type='file'
-        accept='image/*,.ai,.psd,.pdf,.doc,.docx,.csv,.zip,.rar,.ppt,.pptx,.pps,.ppsx,.odt,.rtf,.xls,.xlsx,.txt,.pub,.html,.7z,.eml'
+        accept='image/*,application/*,video/*,audio/*'
         onChange={onAttachmentChange}
         multiple
       />

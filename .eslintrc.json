@@ -65,9 +65,9 @@
           //  side effect imports
           ["^\\u0000"],
           // ext library
-          ["react", "^@?\\w"],
+          ["^react", "@?\\w"],
           // internal imports
-          ["^@/*"],
+          ["@/*"],
           // relative paths up until 3 level
           [
             "^\\./?$",

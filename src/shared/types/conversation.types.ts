@@ -1,57 +1,56 @@
-import { MessageType, User } from '@/shared/types';
+import { TMessageType, TUser } from '@/shared/types';
 
-export type Attachment = {
+export type TAttachment = {
   id: number;
   file: File;
 };
 
-export type ConversationId = {
+export type TConversationId = {
   conversationId: string | number;
 };
 
-export type Conversation = {
+export type TConversation = {
   id: number;
-  creator: User;
-  recipient: User;
+  creator: TUser;
+  recipient: TUser;
   createdAt: string;
   lastMessageSentAt: string;
-  lastMessageSent: MessageType;
+  lastMessageSent: TMessageType;
 };
 
-export type CreateConversationParams = {
+export type TCreateConversationParams = {
   email: string;
-  message: string;
 };
 
-export type ConversationMessage = {
+export type TConversationMessage = {
   id: number;
-  messages: MessageType[];
+  messages: TMessageType[];
 };
 
-export type ConversationType = 'group' | 'private';
+export type TConversationType = 'group' | 'private';
 
-export type ConversationTypeData = {
-  type: ConversationType;
+export type TConversationTypeData = {
+  type: TConversationType;
   label: string;
 };
-export type GetMessagesResponse = {
+export type TGetMessagesResponse = {
   id: number;
-  messages: MessageType[];
+  messages: TMessageType[];
 };
 
-export type DeleteMessageResponse = {
+export type TDeleteMessageResponse = {
   conversationId: number;
   messageId: number;
 };
 
-export type DeleteMessageParams = {
+export type TDeleteMessageParams = {
   id: number;
   messageId: number;
 };
 
-export type MessageEventPayload = {
-  message: MessageType;
-  conversation: Conversation;
+export type TMessageEventPayload = {
+  message: TMessageType;
+  conversation: TConversation;
 };
 
 export type TCreateMessage = {

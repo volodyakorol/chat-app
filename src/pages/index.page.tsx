@@ -1,9 +1,7 @@
-import { Button } from 'antd';
-
 export default function Home() {
   return (
     <div>
-      <Button type='primary'>Primary Button</Button>
+      <h2>simple pet for coax</h2>
     </div>
   );
 }

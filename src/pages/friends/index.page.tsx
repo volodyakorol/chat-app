@@ -1,3 +1,9 @@
+import { useState } from 'react';
+import { Button, List, Tabs } from 'antd';
+
+import { UserItem } from '@/components';
+import { AddFriendButton } from '@/features';
+import { resolveFriend } from '@/shared/lib';
 import {
   useAcceptFriendRequest,
   useGetFriends,
@@ -5,18 +11,12 @@ import {
   useGetUserMe,
   useRejectFriendRequest,
 } from '@/shared/reactQueries';
-import { useState } from 'react';
-import { Button, List, Tabs } from 'antd';
 
-import { UserItem } from '@/components';
-import { AddFriendButton } from '@/features';
-import { User } from '@/shared/types';
-
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 type TTab = 'friends' | 'request';
 
-export default function Home() {
+export default function Friends() {
   const [tab, setTab] = useState<TTab>('friends');
   const isFriendsTab = tab === 'friends';
 
@@ -27,13 +27,9 @@ export default function Home() {
   const { rejectRequest } = useRejectFriendRequest();
   const { acceptRequest } = useAcceptFriendRequest();
 
-  const resolveFriend = (sender: User, receiver: User) => {
-    return userMe?.id !== sender.id ? sender : receiver;
-  };
-
   return (
-    <div className={s.screen}>
-      <div className={s.content}>
+    <div className={styles.screen}>
+      <div className={styles.content}>
         <Tabs
           defaultActiveKey='1'
           onChange={(actionKey) => setTab(actionKey as TTab)}
@@ -43,12 +39,12 @@ export default function Home() {
             <h4>Friends</h4>
             <div className='divider' />
             <List
-              className={s.list}
+              className={styles.list}
               itemLayout='horizontal'
               loading={isLoading}
               dataSource={friends}
-              renderItem={({ id, receiver, sender }) => {
-                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver);
+              renderItem={({ id, friend }) => {
+                const { firstName, lastName, email, profile } = friend;
 
                 return (
                   <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar} />
@@ -56,21 +52,22 @@ export default function Home() {
               }}
             />
           </Tabs.TabPane>
+
           <Tabs.TabPane tab='Request' key='request'>
             <h4>Requests</h4>
             <div className='divider' />
             <List
-              className={s.list}
+              className={styles.list}
               itemLayout='horizontal'
               loading={isLoading}
               dataSource={requests}
               renderItem={({ id, receiver, sender }) => {
-                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver);
+                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver, userMe?.id);
 
                 return (
                   <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
                     {receiver.id === userMe?.id && (
-                      <div className={s.actions}>
+                      <div className={styles.actions}>
                         <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>
                           accept
                         </Button>

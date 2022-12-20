@@ -1,20 +1,20 @@
 import { useMutation, useQueryClient } from 'react-query';
 
 import { userApi } from '@/shared/api';
-import { UpdateUserProfile, User } from '@/shared/types';
+import { TUpdateUserProfile, TUser } from '@/shared/types';
 
 export const useUpdateUserProfile = () => {
   const queryClient = useQueryClient();
 
   const { mutate, ...rest } = useMutation(
     ['update-user-profile'],
-    (data: UpdateUserProfile) => userApi.updateUserProfile(data),
+    (data: TUpdateUserProfile) => userApi.updateUserProfile(data),
     {
       onMutate: async ({ about, avatar, banner }) => {
         await queryClient.cancelQueries(['get-user-me']);
         const prevData = queryClient.getQueryData(['get-user-me']);
 
-        queryClient.setQueryData<User | undefined>(
+        queryClient.setQueryData<TUser | undefined>(
           ['get-user-me'],
           (data) =>
             data && {

@@ -1,7 +1,7 @@
-import { getFriendsRequestQueryKeys } from '@/shared/reactQueries/friend/keys';
 import { useMutation, useQueryClient } from 'react-query';
 
 import { friendsApi } from '@/shared/api';
+import { getFriendsRequestQueryKeys } from '@/shared/reactQueries/friend/keys';
 import { TEmailRequest } from '@/shared/types';
 
 export const useCreateFriendRequest = () => {

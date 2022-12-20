@@ -1,6 +1,6 @@
 .images {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
   gap: 5px;
 
   & img {
@@ -9,8 +9,5 @@
 }
 
 .image_wrapper {
-  min-height: 60px;
-  max-height: 200px;
-  display: flex;
-  align-items: center;
+  max-width: 120px;
 }

@@ -1,7 +1,7 @@
 import { api } from '@/shared/api';
-import { EditMessagePayload, MessageType, TCreateMessage } from '@/shared/types';
+import { TCreateMessage, TEditMessagePayload, TMessageType } from '@/shared/types';
 
-import { CreateConversationParams, DeleteMessageParams, DeleteMessageResponse } from '../types/conversation.types';
+import { TCreateConversationParams, TDeleteMessageParams, TDeleteMessageResponse } from '../types/conversation.types';
 
 export const conversationsApi = {
   getConversations: () => api.get('/conversations').then((res) => res.data),
@@ -26,11 +26,11 @@ export const conversationsApi = {
       .then((res) => res.data);
   },
 
-  createNewConversation: (data: CreateConversationParams) => api.post('/conversations', data).then((res) => res.data),
+  createNewConversation: (data: TCreateConversationParams) => api.post('/conversations', data).then((res) => res.data),
 
-  editMessage: ({ content, id, messageId }: EditMessagePayload) =>
-    api.patch<MessageType>(`/conversations/${id}/messages/${messageId}`, { content }).then((res) => res.data),
+  editMessage: ({ content, id, messageId }: TEditMessagePayload) =>
+    api.patch<TMessageType>(`/conversations/${id}/messages/${messageId}`, { content }).then((res) => res.data),
 
-  deleteMessage: ({ id, messageId }: DeleteMessageParams) =>
-    api.delete<DeleteMessageResponse>(`/conversations/${id}/messages/${messageId}`).then((res) => res.data),
+  deleteMessage: ({ id, messageId }: TDeleteMessageParams) =>
+    api.delete<TDeleteMessageResponse>(`/conversations/${id}/messages/${messageId}`).then((res) => res.data),
 };

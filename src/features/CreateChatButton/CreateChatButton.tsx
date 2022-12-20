@@ -1,58 +1,55 @@
-import { useCreateConversation, useCreateGroup, useSearchUsers } from '@/shared/reactQueries';
 import React, { useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Button, Input, List, Modal } from 'antd';
 
-import { Input, UserList } from '@/components';
+import { UserItem } from '@/components';
+import { useCreateConversation, useGetFriends } from '@/shared/reactQueries';
 
-import s from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export const CreateChatButton = () => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState('');
-  const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState<{ label: string; email: string }[]>([]);
-  const isGroupChat = selectedUsers.length > 1;
+  const [email, setEmail] = useState('');
 
   const { createConversation } = useCreateConversation();
-  const { createGroup } = useCreateGroup();
-  const { data = [], isLoading } = useSearchUsers({ query: value });
+  const { data = [], isLoading } = useGetFriends();
+
+  const filteredFriends = data.filter(({ friend }) => friend.email.includes(email));
 
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
 
-  const handleSubmit = () =>
-    selectedUsers.length &&
-    (isGroupChat
-      ? createGroup({ users: selectedUsers.map(({ email }) => email), title }, { onSuccess: closeModal })
-      : createConversation({ email: selectedUsers[0]?.email, message }, { onSuccess: closeModal }));
+  const handleSubmit = (email: string) => createConversation({ email }, { onSuccess: closeModal });
 
   return (
     <>
-      <Button className={s.createChat} type='primary' onClick={openModal}>
+      <Button className={styles.createChat} type='primary' onClick={openModal}>
         Create chat
       </Button>
-      <Modal data-testid='add-friend-modal' title='Add friend' open={open} onOk={handleSubmit} onCancel={closeModal}>
-        <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />
-        <div className={s.groupTitle}>
-          {isGroupChat ? (
-            <Input placeholder='Enter group title' value={title} onChange={(event) => setTitle(event.target.value)} />
-          ) : (
-            <Input placeholder='Enter message' value={message} onChange={(event) => setMessage(event.target.value)} />
-          )}
-        </div>
-        {selectedUsers.map(({ email }) => (
-          <p key={email}>{email}</p>
-        ))}
-        <div className={s.selectedUsers}>
-          <UserList
-            isLoading={isLoading}
-            users={data}
-            onSelectUser={({ firstName, lastName, email }) =>
-              setSelectedUsers((prev) => [...prev, { label: `${firstName} ${lastName}`, email }])
-            }
-          />
-        </div>
+      <Modal
+        title='Add friend'
+        data-testid='add-friend-modal'
+        open={open}
+        onCancel={closeModal}
+        okButtonProps={{ disabled: true }}
+      >
+        <Input placeholder='Enter message' value={email} onChange={(event) => setEmail(event.target.value)} />
+        <List
+          className={styles.list}
+          itemLayout='horizontal'
+          loading={isLoading}
+          dataSource={filteredFriends}
+          renderItem={({ id, friend }) => {
+            const { firstName, lastName, email, profile } = friend;
+
+            return (
+              <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
+                <Button type='primary' onClick={() => handleSubmit(email)}>
+                  Send Message
+                </Button>
+              </UserItem>
+            );
+          }}
+        />
       </Modal>
     </>
   );

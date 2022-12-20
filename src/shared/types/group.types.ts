@@ -1,119 +1,113 @@
-import { Attachment, Conversation, User } from '@/shared/types';
+import { TAttachment, TConversation, TUser } from '@/shared/types';
 
 export type TGroupId = {
   groupId: number | string;
 };
 
-export type MessageType = {
+export type TMessageType = {
   id: number;
   content?: string;
   createdAt: string;
-  author: User;
-  conversation: Conversation;
-  attachments?: MessageAttachment[];
+  author: TUser;
+  conversation: TConversation;
+  attachments?: TMessageAttachment[];
 };
 
-export type GroupMessageType = {
+export type TGroupMessageType = {
   id: number;
   content?: string;
   createdAt: string;
-  author: User;
-  group: Group;
-  attachments?: MessageAttachment[];
+  author: TUser;
+  group: TGroup;
+  attachments?: TMessageAttachment[];
 };
 
-export type Group = {
+export type TGroup = {
   id: number;
   title?: string;
-  users: User[];
-  creator: User;
-  owner: User;
-  messages: GroupMessageType[];
+  users: TUser[];
+  creator: TUser;
+  owner: TUser;
+  messages: TGroupMessageType[];
   createdAt: number;
-  lastMessageSent: MessageType;
+  lastMessageSent: TMessageType;
   lastMessageSentAt: string;
   avatar?: string;
 };
 
-export type FetchGroupMessagePayload = {
+export type TFetchGroupMessagePayload = {
   id: number;
-  messages: GroupMessageType[];
+  messages: TGroupMessageType[];
 };
 
-export type CreateMessageParams = {
+export type TCreateMessageParams = {
   id: number;
   content: string;
 };
 
-export type DeleteGroupMessageParams = {
+export type TDeleteGroupMessageParams = {
   id: number;
   messageId: number;
 };
 
-export type DeleteGroupMessageResponse = {
+export type TDeleteGroupMessageResponse = {
   groupId: number;
   messageId: number;
 };
 
-export type EditMessagePayload = {
+export type TEditMessagePayload = {
   id: number;
   messageId: number;
   content: string;
 };
-export type MessageAttachment = {
+export type TMessageAttachment = {
   key: string;
+  fileType: string;
+  originalname: string;
 };
 
-export type CreateGroupParams = {
+export type TCreateGroupParams = {
   users: string[];
   title: string;
 };
 
-export type AddGroupRecipientParams = {
+export type TAddGroupRecipientParams = {
   id: number;
   email: string;
 };
 
-export type RemoveGroupRecipientParams = {
+export type TRemoveGroupRecipientParams = {
   id: number;
   userId: number;
 };
 
-export type UpdateGroupOwnerParams = {
+export type TUpdateGroupOwnerParams = {
   id: number;
   newOwnerId: number;
 };
 
-export type UpdateGroupDetailsPayload = {
+export type TUpdateGroupDetailsPayload = {
   id: number;
   data: FormData;
 };
 
-export type GroupMessage = {
+export type TGroupMessage = {
   id: number;
-  messages: GroupMessageType[];
+  messages: TGroupMessageType[];
 };
 
-export type GroupMessageEventPayload = {
-  message: GroupMessageType;
-  group: Group;
-};
-export enum UpdateGroupAction {
-  NEW_MESSAGE = 'newMessage',
-}
-
-export type UpdateGroupPayload = {
-  type?: UpdateGroupAction;
-  group: Group;
+export type TGroupMessageEventPayload = {
+  message: TGroupMessageType;
+  group: TGroup;
 };
 
 export type GroupParticipantLeftPayload = {
-  group: Group;
+  group: TGroup;
   userId: number;
 };
 
 export type TCreateGroupMessage = {
-  attachments?: Attachment[];
+  attachments?: TAttachment[];
   groupId: number;
   content: string;
 };

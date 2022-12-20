@@ -6,7 +6,7 @@
   position: fixed;
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.327) 0px 5px 15px;
-  z-index: 2147483647;
+  z-index: 1000;
 }
 
 .content {
@@ -26,8 +26,15 @@
 }
 
 .menu {
-  display: grid;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
   gap: 15px;
+
+  div:last-child {
+    margin-top: auto;
+    margin-bottom: 80px;
+  }
 }
 
 .menuItem {
@@ -55,7 +62,7 @@
   align-items: center;
   color: #191548;
   background-color: #e9f3fc;
-  transition: all .3s;
+  transition: all 0.3s;
 
   &:hover {
     background-color: #d9e7f3;

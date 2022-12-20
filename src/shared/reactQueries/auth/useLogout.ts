@@ -1,12 +1,19 @@
-import { useMutation, UseMutationOptions } from 'react-query';
+import { useMutation, UseMutationOptions, useQueryClient } from 'react-query';
 
 import { authApi } from '@/shared/api/auth';
 
 export const useLogout = (options?: UseMutationOptions) => {
-  const { mutate, ...rest } = useMutation(['logout'], authApi.logout, options);
+  const queryClient = useQueryClient();
+  const { mutate, ...rest } = useMutation(['logout'], authApi.logout, {
+    onSuccess: (data, variables, context) => {
+      queryClient.removeQueries(['get-user-me']);
+      options?.onSuccess && options?.onSuccess(data, variables, context);
+    },
+    ...options,
+  });
 
   return {
-    register: mutate,
+    logout: mutate,
     ...rest,
   };
 };

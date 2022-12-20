@@ -1,5 +1,3 @@
-//! https://www.favicon-generator.org/
-
 import { TFavIcon } from '@/shared/types';
 
 export const favicons: TFavIcon[] = [

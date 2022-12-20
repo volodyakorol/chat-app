@@ -2,7 +2,7 @@ import { useQuery, UseQueryOptions } from 'react-query';
 import { AxiosError } from 'axios';
 
 import { groupApi } from '@/shared/api';
-import { Group } from '@/shared/types';
+import { TGroup } from '@/shared/types';
 
-export const useGetGroups = <T = Group[]>(options?: UseQueryOptions<Group[], AxiosError, T>) =>
-  useQuery<Group[], AxiosError, T>(['get-groups'], groupApi.getGroups, options);
+export const useGetGroups = <T = TGroup[]>(options?: UseQueryOptions<TGroup[], AxiosError, T>) =>
+  useQuery<TGroup[], AxiosError, T>(['get-groups'], groupApi.getGroups, options);

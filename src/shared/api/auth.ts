@@ -1,8 +1,8 @@
 import { api } from '@/shared/api';
-import { TLogin, TRegister, User } from '@/shared/types';
+import { TLogin, TRegister, TUser } from '@/shared/types';
 
 export const authApi = {
-  getAuthUser: () => api.get<User>('/auth/status').then((res) => res.data),
+  getAuthUser: () => api.get<TUser>('/auth/status').then((res) => res.data),
 
   register: (data: TRegister) => api.post('/auth/register', data).then((res) => res.data),
 

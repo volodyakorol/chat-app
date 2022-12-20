@@ -9,9 +9,9 @@ import {
 
 import { TFileProps } from '@/shared/types/file.types';
 
-import stylesheet from './styles.module.scss';
+import styles from './styles.module.scss';
 
-export const TextFile = ({ files }: TFileProps) => {
+export const TextFile = ({ files }: { files: (TFileProps & { filetype?: string })[] }) => {
   const icon = (fileExtension: string) => {
     if (['pdf'].includes(fileExtension)) return <FilePdfOutlined />;
     if (['txt'].includes(fileExtension)) return <FileTextOutlined />;
@@ -23,20 +23,15 @@ export const TextFile = ({ files }: TFileProps) => {
   };
 
   return (
-    <div className={stylesheet.files}>
-      {files.map(({ file, id, name }) => {
-        const fileExtension = file.split('.').at(-1) ?? '';
-        const fileName = `${name}.${fileExtension}`;
-
-        return (
-          <div key={id} className={stylesheet.file}>
-            <a className={stylesheet.name} onClick={() => console.log(file, fileName)}>
-              <span className={stylesheet.icon}>{icon(fileExtension)}</span>
-              {fileName}
-            </a>
-          </div>
-        );
-      })}
+    <div className={styles.files}>
+      {files.map(({ filename, src, filetype }) => (
+        <div key={src} className={styles.file}>
+          <a className={styles.name} href={src}>
+            <span className={styles.icon}>{icon(filetype ?? '')}</span>
+            {filename}
+          </a>
+        </div>
+      ))}
     </div>
   );
 };
