@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 import { api } from '@/shared/api';
 import {
   TAddGroupRecipientParams,
@@ -17,7 +19,7 @@ import {
 } from '@/shared/types';
 
 export const groupApi = {
-  getGroups: () => api.get<TGroup[]>('/groups').then((res) => res.data),
+  getGroups: (options: AxiosRequestConfig) => api.get<TGroup[]>('/groups', options).then((res) => res.data),
 
   getGroupById: ({ id }: TIdRequest) => api.get<TGroup>(`/groups/${id}`).then((res) => res.data),
 

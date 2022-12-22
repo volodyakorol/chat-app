@@ -1,12 +1,27 @@
 import { useState } from 'react';
+import { dehydrate, QueryClient } from 'react-query';
 import dayjs from 'dayjs';
+import { GetServerSideProps } from 'next';
 
 import { Conversation, UserMessage } from '@/components';
 import { CreateGroupButton } from '@/features';
+import { groupApi } from '@/shared/api';
 import { useCreateGroupMessage, useGetGroupMessages, useGetGroups, useGetUserMe } from '@/shared/reactQueries';
 import { GroupAside, MessageInput } from '@/widgets';
 
 import styles from './styles.module.scss';
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['get-groups'], () => groupApi.getGroups({ headers: { cookie: ctx.req.headers.cookie } }));
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 export default function Groups() {
   const [selectedGroup, setSelectedGroup] = useState(0);
@@ -25,7 +40,6 @@ export default function Groups() {
           <CreateGroupButton />
         </div>
         <div>
-          {!!groups.length || <div style={{ width: 100, height: 100, backgroundColor: 'red' }}>sdf</div>}
           {groups.map(({ id, lastMessageSent, lastMessageSentAt, avatar, title }) => {
             const { content } = lastMessageSent ?? {};
 

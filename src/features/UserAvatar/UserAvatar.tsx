@@ -41,6 +41,7 @@ export const UserAvatar = ({ canEdit, src = '', onAvatarChange, ...avatarProps }
     <>
       <div onClick={showModal}>
         <Avatar
+          data-testid='avatar'
           src={isUrlSrc ? src : SDN_URL + src}
           size={90}
           shape='circle'
@@ -50,7 +51,7 @@ export const UserAvatar = ({ canEdit, src = '', onAvatarChange, ...avatarProps }
       </div>
 
       <Modal title='Profile photo' open={isModalVisible} bodyStyle={{ padding: 0 }} onCancel={onClose} onOk={onSave}>
-        <div className={styles.cropper}>
+        <div data-testid='image-cropper' className={styles.cropper}>
           <ImageCropper src={src} ref={cropperRef} />
         </div>
       </Modal>

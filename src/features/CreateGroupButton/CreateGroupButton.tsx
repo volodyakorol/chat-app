@@ -34,7 +34,7 @@ export const CreateGroupButton = () => {
       <Button className={styles.createChat} type='primary' onClick={openModal}>
         Create group
       </Button>
-      <Modal data-testid='add-friend-modal' title='Add friend' open={open} onOk={handleSubmit} onCancel={closeModal}>
+      <Modal data-testid='create-group-modal' title='Add friend' open={open} onOk={handleSubmit} onCancel={closeModal}>
         <Input placeholder='Enter email' value={value} onChange={(event) => setValue(event.target.value)} />
 
         <div className={styles.groupTitle}>
@@ -44,7 +44,7 @@ export const CreateGroupButton = () => {
             value={title}
             onChange={(event) => setTitle(event.target.value)}
           />
-          <p>{error}</p>
+          <p data-testid='error'>{error}</p>
         </div>
 
         <div className={styles.selectedUsers}>

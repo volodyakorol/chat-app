@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { dehydrate, QueryClient } from 'react-query';
 import { Button, List, Tabs } from 'antd';
+import { GetServerSideProps } from 'next';
 
 import { UserItem } from '@/components';
 import { AddFriendButton } from '@/features';
+import { friendsApi } from '@/shared/api';
 import { resolveFriend } from '@/shared/lib';
 import {
+  getFriendsQueryKeys,
+  getFriendsRequestQueryKeys,
   useAcceptFriendRequest,
   useGetFriends,
   useGetFriendsRequests,
@@ -14,15 +18,28 @@ import {
 
 import styles from './styles.module.scss';
 
-type TTab = 'friends' | 'request';
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(getFriendsQueryKeys, () =>
+    friendsApi.getFriends({ headers: { cookie: ctx.req.headers.cookie } }),
+  );
+
+  await queryClient.prefetchQuery(getFriendsRequestQueryKeys, () =>
+    friendsApi.getFriendRequests({ headers: { cookie: ctx.req.headers.cookie } }),
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 export default function Friends() {
-  const [tab, setTab] = useState<TTab>('friends');
-  const isFriendsTab = tab === 'friends';
-
   const { data: userMe } = useGetUserMe();
-  const { data: friends, isLoading } = useGetFriends({ enabled: isFriendsTab });
-  const { data: requests } = useGetFriendsRequests({ enabled: isFriendsTab });
+  const { data: friends, isLoading } = useGetFriends();
+  const { data: requests } = useGetFriendsRequests();
 
   const { rejectRequest } = useRejectFriendRequest();
   const { acceptRequest } = useAcceptFriendRequest();
@@ -30,11 +47,7 @@ export default function Friends() {
   return (
     <div className={styles.screen}>
       <div className={styles.content}>
-        <Tabs
-          defaultActiveKey='1'
-          onChange={(actionKey) => setTab(actionKey as TTab)}
-          tabBarExtraContent={{ right: <AddFriendButton /> }}
-        >
+        <Tabs defaultActiveKey='1' tabBarExtraContent={{ right: <AddFriendButton /> }}>
           <Tabs.TabPane tab='Friends' key='friends'>
             <h4>Friends</h4>
             <div className='divider' />

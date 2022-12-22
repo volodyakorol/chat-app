@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { dehydrate, QueryClient } from 'react-query';
 import dayjs from 'dayjs';
+import { GetServerSideProps } from 'next';
 
 import { Conversation, UserMessage } from '@/components';
 import { CreateChatButton } from '@/features';
+import { conversationsApi } from '@/shared/api';
 import {
   useCreateConversationMessage,
   useGetConversationMessages,
@@ -12,6 +15,20 @@ import {
 import { MessageInput, UserAside } from '@/widgets';
 
 import styles from './styles.module.scss';
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['get-conversations'], () =>
+    conversationsApi.getConversations({ headers: { cookie: ctx.req.headers.cookie } }),
+  );
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+};
 
 export default function Chat() {
   const [selectedChat, setSelectedChat] = useState(0);

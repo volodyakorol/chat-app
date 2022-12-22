@@ -1,10 +1,12 @@
+import { AxiosRequestConfig } from 'axios';
+
 import { api } from '@/shared/api';
 import { TCreateMessage, TEditMessagePayload, TMessageType } from '@/shared/types';
 
 import { TCreateConversationParams, TDeleteMessageParams, TDeleteMessageResponse } from '../types/conversation.types';
 
 export const conversationsApi = {
-  getConversations: () => api.get('/conversations').then((res) => res.data),
+  getConversations: (options: AxiosRequestConfig) => api.get('/conversations', options).then((res) => res.data),
   getConversationById: (id: number) => api.get(`/conversations/${id}`).then((res) => res.data),
   // checkConversationOrCreate: (recipientId: number) =>
   //   api.get<Conversation>(`/exists/conversations/${recipientId}`).then((res) => res.data),

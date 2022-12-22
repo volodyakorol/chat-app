@@ -18,7 +18,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3001",
     "lint": "next lint",
     "lint:fix": "eslint src --fix && yarn format",
     "lint:strict": "eslint --max-warnings=0 src",
@@ -73,5 +73,8 @@
     "postcss": "^8.4.19",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4"
+  },
+  "msw": {
+    "workerDirectory": ""
   }
 }
