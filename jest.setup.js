@@ -6,6 +6,7 @@ import '@testing-library/jest-dom';
 // eslint-disable-next-line no-undef
 jest.mock('next/router', () => require('next-router-mock'));
 
+
 global.matchMedia =
   global.matchMedia ||
   function () {

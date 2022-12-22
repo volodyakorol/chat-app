@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 import { api } from '@/shared/api';
 import { TEmailRequest } from '@/shared/types';
 
@@ -5,6 +7,11 @@ import { TSearchUserRequest, TStatusMessage, TUpdateUserProfile, TUser } from '.
 
 export const userApi = {
   checkEmailExists: (params: TEmailRequest) => api.get('/users/check', { params }).then((res) => res.data),
+
+  getUserIds: () => api.get<number[]>('/users/ids').then((res) => res.data),
+
+  getById: (params: { userId: number }, options?: AxiosRequestConfig) =>
+    api.get('/users/id', { params, ...options }).then((res) => res.data),
 
   searchUsers: (params: TSearchUserRequest) => api.get<TUser[]>('/users/search', { params }).then((res) => res.data),
 

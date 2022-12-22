@@ -3,17 +3,14 @@ import { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider, setLogger } from 'react-query';
 import { render } from '@testing-library/react';
 
-export const createTestQueryClient = () =>
-  new QueryClient({
+export function renderWithClient(ui: ReactElement) {
+  const testQueryClient = new QueryClient({
     defaultOptions: {
       queries: {
         retry: false,
       },
     },
   });
-
-export function renderWithClient(ui: ReactElement) {
-  const testQueryClient = createTestQueryClient();
 
   setLogger({
     log: console.log,

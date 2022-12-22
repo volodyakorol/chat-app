@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 import { api } from '@/shared/api';
 import { TEmailRequest, TIdRequest } from '@/shared/types';
 
@@ -9,9 +11,9 @@ import {
 } from '../types/friend.types';
 
 export const friendsApi = {
-  getFriends: () => api.get('/friends').then((res) => res.data),
+  getFriends: (options: AxiosRequestConfig) => api.get<TFriend[]>('/friends', options).then((res) => res.data),
 
-  getFriendRequests: () => api.get('/friends/requests').then((res) => res.data),
+  getFriendRequests: (options: AxiosRequestConfig) => api.get('/friends/requests', options).then((res) => res.data),
 
   createFriendRequest: ({ email }: TEmailRequest) =>
     api.post<TFriendRequest>('/friends/requests', { email }).then((res) => res.data),

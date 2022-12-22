@@ -23,8 +23,8 @@ export const useUpdateUserProfile = () => {
                 id: 0,
                 ...data.profile,
                 about,
-                avatar: avatar && URL.createObjectURL(avatar as Blob),
-                banner: banner && URL.createObjectURL(banner as Blob),
+                avatar: avatar ? URL.createObjectURL(avatar as Blob) : data.profile?.avatar,
+                banner: banner ? URL.createObjectURL(banner as Blob) : data.profile?.banner,
               },
             },
         );
