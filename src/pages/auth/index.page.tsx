@@ -22,6 +22,7 @@ export default function Auth() {
 
   const { register } = useRegister({
     onSuccess: () => {
+      setTab('login');
       notification.success({ message: 'Register success', description: 'Please login' });
     },
   });
@@ -42,7 +43,9 @@ export default function Auth() {
         <div className={styles.form}>
           {tab === 'login' ? (
             <Form
-              name='basic'
+              role='form'
+              name='login'
+              title='login'
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
               initialValues={{ remember: true }}
@@ -58,7 +61,7 @@ export default function Auth() {
                 name='password'
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
-                <Input.Password />
+                <Input.Password data-testid='pass' />
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
@@ -69,7 +72,9 @@ export default function Auth() {
             </Form>
           ) : (
             <Form
-              name='basic'
+              role='form'
+              name='register'
+              title='register'
               labelCol={{ span: 8 }}
               wrapperCol={{ span: 16 }}
               initialValues={{ remember: true }}
@@ -99,7 +104,7 @@ export default function Auth() {
                 name='password'
                 rules={[{ required: true, message: 'Please input your password!' }]}
               >
-                <Input.Password />
+                <Input.Password data-testid='pass' />
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

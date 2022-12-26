@@ -25,7 +25,7 @@ export const TextFile = ({ files }: { files: (TFileProps & { filetype?: string }
   return (
     <div className={styles.files}>
       {files.map(({ filename, src, filetype }) => (
-        <div key={src} className={styles.file}>
+        <div data-testid="text-file" key={src} className={styles.file}>
           <a className={styles.name} href={src}>
             <span className={styles.icon}>{icon(filetype ?? '')}</span>
             {filename}

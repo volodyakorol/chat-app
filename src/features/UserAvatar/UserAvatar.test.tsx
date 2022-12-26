@@ -36,7 +36,11 @@ describe('UserAvatar', () => {
   it('should show url image', async () => {
     renderWithClient(<UserAvatar src='https://image' />);
 
-    screen.debug();
     expect(screen.getByRole('img')).toHaveAttribute('src', 'https://image');
+  });
+  it('toMatchSnapshot', () => {
+    renderWithClient(<UserAvatar src='https://image' />);
+
+    expect(screen).toMatchSnapshot();
   });
 });

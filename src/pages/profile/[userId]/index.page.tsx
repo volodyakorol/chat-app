@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   const queryClient = new QueryClient();
 
-  queryClient.prefetchQuery(['get-user', USER_ID], () => userApi.getById({ userId: USER_ID }));
+  await queryClient.prefetchQuery(['get-user', USER_ID], () => userApi.getById({ userId: USER_ID }));
 
   return {
     props: {

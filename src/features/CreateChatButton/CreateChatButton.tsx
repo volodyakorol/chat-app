@@ -13,7 +13,7 @@ export const CreateChatButton = () => {
   const { createConversation } = useCreateConversation();
   const { data = [], isLoading } = useGetFriends();
 
-  const filteredFriends = data.filter(({ friend }) => friend.email.includes(email));
+  const filteredFriends = data.filter(({ friend }) => friend.email.includes(email.toLowerCase()));
 
   const openModal = () => setOpen(true);
   const closeModal = () => setOpen(false);
@@ -32,7 +32,7 @@ export const CreateChatButton = () => {
         onCancel={closeModal}
         okButtonProps={{ disabled: true }}
       >
-        <Input placeholder='Enter message' value={email} onChange={(event) => setEmail(event.target.value)} />
+        <Input placeholder='Enter email' value={email} onChange={(event) => setEmail(event.target.value)} />
         <List
           className={styles.list}
           itemLayout='horizontal'

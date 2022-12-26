@@ -2,7 +2,7 @@ export type TProfile = {
   id: number;
   about?: string;
   avatar?: string;
-  banner?: string;
+  banner?: string | null;
 };
 
 export type TUserPresence = {
@@ -21,8 +21,8 @@ export type TUser = {
   firstName: string;
   lastName: string;
   profile?: TProfile;
-  presence?: TUserPresence;
-  peer: TUserPeer;
+  presence?: TUserPresence | null;
+  peer?: TUserPeer;
 };
 
 export type TStatusMessage = {

@@ -18,7 +18,7 @@ type TUserItemProps = TDiv & {
 
 export const Conversation = ({ avatar, title, time, description, isActive, ...props }: TUserItemProps) => {
   return (
-    <div className={clsx(styles.container, { [styles.active]: isActive })} {...props}>
+    <div data-testid="conversation" className={clsx(styles.container, { [styles.active]: isActive })} {...props}>
       <UserAvatar src={avatar} size={44} icon={<FontAwesomeIcon icon={faUserAlt} />} />
 
       <div className={styles.item}>

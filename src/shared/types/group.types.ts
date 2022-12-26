@@ -28,7 +28,7 @@ export type TGroup = {
   users: TUser[];
   creator: TUser;
   owner: TUser;
-  createdAt: number;
+  createdAt: string;
   lastMessageSent: { content: string; createdAt: string; id: number };
   lastMessageSentAt: string;
   avatar?: string;

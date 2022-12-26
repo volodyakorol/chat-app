@@ -54,7 +54,15 @@ export const MessageInput = ({ onSend }: TMessageInputProps) => {
         value={content}
         onChange={(event) => setContent(event.target.value)}
         prefix={<FontAwesomeIcon className='pointer' onClick={onAttachmentClick} color='#C5C7D2' icon={faPaperclip} />}
-        addonAfter={<FontAwesomeIcon className='pointer' onClick={onSentClick} color='#C5C7D2' icon={faPaperPlane} />}
+        addonAfter={
+          <FontAwesomeIcon
+            data-testid='sent-btn'
+            className='pointer'
+            onClick={onSentClick}
+            color='#C5C7D2'
+            icon={faPaperPlane}
+          />
+        }
       />
       <input
         ref={fileInputRef}

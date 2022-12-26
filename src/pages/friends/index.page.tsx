@@ -60,7 +60,7 @@ export default function Friends() {
                 const { firstName, lastName, email, profile } = friend;
 
                 return (
-                  <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar} />
+                  <UserItem data-testid="friend-user-item" key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar} />
                 );
               }}
             />
@@ -78,7 +78,7 @@ export default function Friends() {
                 const { firstName, lastName, email, profile } = resolveFriend(sender, receiver, userMe?.id);
 
                 return (
-                  <UserItem key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
+                  <UserItem data-testid="request-user-item" key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
                     {receiver.id === userMe?.id && (
                       <div className={styles.actions}>
                         <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>

@@ -14,8 +14,9 @@ type TUserItemProps = TDiv & {
 };
 
 export const UserItem = ({ avatar, title, description, children, ...props }: PropsWithChildren<TUserItemProps>) => {
+
   return (
-    <div className={styles.container} {...props}>
+    <div data-testid="user-item" className={styles.container} {...props}>
       <UserAvatar src={avatar} size={38} icon={<FontAwesomeIcon icon={faUserAlt} />} />
 
       <div>
