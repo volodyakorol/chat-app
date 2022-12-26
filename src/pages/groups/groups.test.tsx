@@ -27,6 +27,6 @@ describe('Groups page', () => {
     const conversations = await screen.findAllByTestId('conversation');
 
     fireEvent.click(conversations[0]);
-    expect(screen.getByPlaceholderText(/Type something/i)).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText(/Type something/i)).toBeInTheDocument();
   });
 });

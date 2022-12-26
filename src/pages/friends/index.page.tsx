@@ -47,54 +47,81 @@ export default function Friends() {
   return (
     <div className={styles.screen}>
       <div className={styles.content}>
-        <Tabs defaultActiveKey='1' tabBarExtraContent={{ right: <AddFriendButton /> }}>
-          <Tabs.TabPane tab='Friends' key='friends'>
-            <h4>Friends</h4>
-            <div className='divider' />
-            <List
-              className={styles.list}
-              itemLayout='horizontal'
-              loading={isLoading}
-              dataSource={friends}
-              renderItem={({ id, friend }) => {
-                const { firstName, lastName, email, profile } = friend;
+        <Tabs
+          defaultActiveKey='1'
+          tabBarExtraContent={{ right: <AddFriendButton /> }}
+          items={[
+            {
+              label: 'Friends',
+              key: 'friends',
+              children: (
+                <>
+                  <h4>Friends</h4>
+                  <div className='divider' />
+                  <List
+                    className={styles.list}
+                    itemLayout='horizontal'
+                    loading={isLoading}
+                    dataSource={friends}
+                    renderItem={({ id, friend }) => {
+                      const { firstName, lastName, email, profile } = friend;
 
-                return (
-                  <UserItem data-testid="friend-user-item" key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar} />
-                );
-              }}
-            />
-          </Tabs.TabPane>
+                      return (
+                        <UserItem
+                          data-testid='friend-user-item'
+                          key={id}
+                          title={`${firstName} ${lastName}`}
+                          description={email}
+                          avatar={profile?.avatar}
+                        />
+                      );
+                    }}
+                  />
+                </>
+              ),
+            },
+            {
+              label: 'Request',
+              key: 'request',
+              children: (
+                <>
+                  <h4>Requests</h4>
+                  <div className='divider' />
+                  <List
+                    className={styles.list}
+                    itemLayout='horizontal'
+                    loading={isLoading}
+                    dataSource={requests}
+                    renderItem={({ id, receiver, sender }) => {
+                      const { firstName, lastName, email, profile } = resolveFriend(sender, receiver, userMe?.id);
 
-          <Tabs.TabPane tab='Request' key='request'>
-            <h4>Requests</h4>
-            <div className='divider' />
-            <List
-              className={styles.list}
-              itemLayout='horizontal'
-              loading={isLoading}
-              dataSource={requests}
-              renderItem={({ id, receiver, sender }) => {
-                const { firstName, lastName, email, profile } = resolveFriend(sender, receiver, userMe?.id);
-
-                return (
-                  <UserItem data-testid="request-user-item" key={id} title={`${firstName} ${lastName}`} description={email} avatar={profile?.avatar}>
-                    {receiver.id === userMe?.id && (
-                      <div className={styles.actions}>
-                        <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>
-                          accept
-                        </Button>
-                        <Button size='small' onClick={() => rejectRequest({ id })}>
-                          reject
-                        </Button>
-                      </div>
-                    )}
-                  </UserItem>
-                );
-              }}
-            />
-          </Tabs.TabPane>
-        </Tabs>
+                      return (
+                        <UserItem
+                          data-testid='request-user-item'
+                          key={id}
+                          title={`${firstName} ${lastName}`}
+                          description={email}
+                          avatar={profile?.avatar}
+                        >
+                          {receiver.id === userMe?.id && (
+                            <div className={styles.actions}>
+                              <Button type='primary' size='small' onClick={() => acceptRequest({ id })}>
+                                accept
+                              </Button>
+                              <Button size='small' onClick={() => rejectRequest({ id })}>
+                                reject
+                              </Button>
+                            </div>
+                          )}
+                        </UserItem>
+                      );
+                    }}
+                  />
+                </>
+              ),
+            },
+          ]}
+        />
       </div>
     </div>
   );
