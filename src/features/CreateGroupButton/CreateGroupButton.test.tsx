@@ -56,4 +56,22 @@ describe('CreateGroupButton', () => {
 
     expect(await waitFor(() => screen.getByTestId('error').textContent)).toMatch(/enter Group title/i);
   });
+
+  it('error if not select users', async () => {
+    renderWithClient(<CreateGroupButton />);
+
+    fireEvent.click(screen.getByText(/Create group/i));
+
+    const submitButton = await waitFor(() => screen.getByRole('button', { name: /ok/i }));
+    expect(submitButton).toBeInTheDocument();
+
+    fireEvent.click(submitButton);
+
+    expect(await waitFor(() => screen.getByTestId('error').textContent)).toMatch(/please enter Group title/i);
+  });
+  it('toMatchSnapshot', () => {
+    renderWithClient(<CreateGroupButton />);
+
+    expect(screen).toMatchSnapshot();
+  });
 });

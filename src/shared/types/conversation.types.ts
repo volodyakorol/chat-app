@@ -15,7 +15,7 @@ export type TConversation = {
   recipient: TUser;
   createdAt: string;
   lastMessageSentAt: string;
-  lastMessageSent: TMessageType;
+  lastMessageSent: TMessageType | null;
 };
 
 export type TCreateConversationParams = {

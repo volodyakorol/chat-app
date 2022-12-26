@@ -24,6 +24,7 @@
     "lint:strict": "eslint --max-warnings=0 src",
     "test:watch": "jest --watch",
     "test": "jest",
+    "test-coverage": "jest --coverage",
     "format": "prettier -w ./src"
   },
   "dependencies": {

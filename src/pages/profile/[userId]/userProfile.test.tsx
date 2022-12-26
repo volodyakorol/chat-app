@@ -12,7 +12,7 @@ describe('User profile page', () => {
   it('fetches data', async () => {
     renderWithClient(<UserProfile />);
 
-    const userName = await screen.findByText(/firstName lastName/i);
+    const userName = await screen.findByRole('heading', { name: /firstName2 lastName2/i });
     expect(userName).toBeInTheDocument();
   });
   it('about', async () => {

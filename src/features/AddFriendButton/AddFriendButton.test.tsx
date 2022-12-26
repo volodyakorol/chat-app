@@ -30,4 +30,9 @@ describe('AddFriendButton', () => {
 
     expect(await waitFor(() => screen.getByPlaceholderText(/enter email/i))).toHaveAttribute('value', 'hello');
   });
+  it('toMatchSnapshot', () => {
+    renderWithClient(<AddFriendButton />);
+
+    expect(screen).toMatchSnapshot();
+  });
 });

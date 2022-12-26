@@ -14,12 +14,14 @@ type TUserAsideProps = {
 
 export const UserAside = ({ selectedChat }: TUserAsideProps) => {
   const { data: userMe } = useGetUserMe();
-  const { data } = useGetConversationById(selectedChat);
+  const { data, isLoading } = useGetConversationById(selectedChat);
   const { createdAt, creator, recipient } = data ?? {};
   const { firstName, lastName, email, profile } = (userMe?.id !== recipient?.id ? recipient : creator) ?? {};
 
+  if (isLoading) return null;
+
   return (
-    <div>
+    <div data-testid='123'>
       <div className={styles.asideHeader}>
         <UserAvatar size={140} src={profile?.avatar} />
         <h3>{`${firstName} ${lastName}`}</h3>

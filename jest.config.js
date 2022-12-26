@@ -9,6 +9,8 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', '<rootDir>/'],
   testEnvironment: 'jest-environment-jsdom',
   transformIgnorePatterns: ['/node_modules/(?!(axios)/)'],
+  collectCoverage: true,
+  collectCoverageFrom: ['<rootDir>/src/**/*', '!<rootDir>/src/shared/**/*', '!<rootDir>/src/**/__snapshots__/**/*'],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^~/(.*)$': '<rootDir>/public/$1',
